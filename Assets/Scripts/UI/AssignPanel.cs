@@ -64,7 +64,6 @@ public class AssignPanel : MonoBehaviour
     // Метод обработки нажатия на кнопку
     private void OnButtonClicked(Human human)
     {
-        Debug.Log("Button clicked for: " + human.humanName);
-        // Добавьте вашу логику обработки нажатия на кнопку
+        HumanManager.Instance.AssignHuman(human);
     }
 }

@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq; // Для работы с LINQ
 
 public class CreatePanel : MonoBehaviour
 {
@@ -12,20 +13,23 @@ public class CreatePanel : MonoBehaviour
 
     public Button confirmButton;
     public Button resetButton;
-    public Slider[] sliders;                
+    public Slider[] sliders;
 
-    public Human currentHuman;             
+    public Human currentHuman;
 
-    public Vector2 startPosition;     
-    public Vector2 targetPosition;    
-    public float moveDuration = 0.5f;       
+    public Vector2 startPosition;
+    public Vector2 targetPosition;
+    public float moveDuration = 0.5f;
 
     private RectTransform rectTransform;
     private Tween moveTween;
-    private Vector2 hiddenPosition;        
+    private Vector2 hiddenPosition;
 
-    private Stage currentStage; 
+    private Stage currentStage;
     private float[] sliderValues;
+
+    // Ссылка на InputField для имени персонажа
+    public TMP_InputField nameInputField;
 
     void Start()
     {
@@ -85,6 +89,10 @@ public class CreatePanel : MonoBehaviour
 
     void OnConfirmClicked()
     {
+        // Получаем имя из InputField, если оно пустое, устанавливаем дефолтное уникальное имя
+        string characterName = string.IsNullOrEmpty(nameInputField.text) ? GetUniqueDefaultName(currentHuman is Woman) : nameInputField.text;
+        currentHuman.humanName = characterName;
+
         for (int i = 0; i < sliders.Length; i++)
         {
             if (sliders[i].gameObject.activeSelf)
@@ -96,29 +104,46 @@ public class CreatePanel : MonoBehaviour
         switch (currentStage)
         {
             case Stage.Physical:
-                currentHuman.strength = sliderValues[0];
-                currentHuman.endurance = sliderValues[1];
-                currentHuman.agility = sliderValues[2];
-                ShowStage(Stage.Intellectual);
-                break;
+            currentHuman.strength = sliderValues[0];
+            currentHuman.endurance = sliderValues[1];
+            currentHuman.agility = sliderValues[2];
+            ShowStage(Stage.Intellectual);
+            break;
 
             case Stage.Intellectual:
-                currentHuman.logic = sliderValues[0];
-                currentHuman.creativity = sliderValues[1];
-                currentHuman.learnability = sliderValues[2];
-                ShowStage(Stage.Mental);
-                break;
+            currentHuman.logic = sliderValues[0];
+            currentHuman.creativity = sliderValues[1];
+            currentHuman.learnability = sliderValues[2];
+            ShowStage(Stage.Mental);
+            break;
 
             case Stage.Mental:
-                currentHuman.emotionalStability = sliderValues[0];
-                currentHuman.socialSkills = sliderValues[1];
-                currentHuman.motivation = sliderValues[2];
-                closeButton.GetComponent<CloseCreatePanelButton>().OnButtonClick();
-                CreateHuman();
-                break;
+            currentHuman.emotionalStability = sliderValues[0];
+            currentHuman.socialSkills = sliderValues[1];
+            currentHuman.motivation = sliderValues[2];
+            closeButton.GetComponent<CloseCreatePanelButton>().OnButtonClick();
+            CreateHuman();
+            break;
         }
 
         UpdateCreatePanel();
+    }
+
+    // Метод для получения уникального имени (для мальчиков "Adam", для девочек "Eva")
+    string GetUniqueDefaultName(bool isFemale)
+    {
+        string baseName = isFemale ? "Eva" : "Adam";
+        int index = 1;
+        string newName = baseName + index;
+
+        // Проходим по списку существующих персонажей и ищем максимальный номер
+        while (HumanManager.Instance.listHumans.Any(human => human.humanName == newName))
+        {
+            index++;
+            newName = baseName + index;
+        }
+
+        return newName;
     }
 
     public void UpdateCreatePanel()
@@ -182,6 +207,7 @@ public class CreatePanel : MonoBehaviour
     void CreateHuman()
     {
         Debug.Log("Character created!");
+        Debug.Log("Name: " + currentHuman.humanName);
         Debug.Log("Physical: " + currentHuman.strength + ", " + currentHuman.endurance + ", " + currentHuman.agility);
         Debug.Log("Intellectual: " + currentHuman.logic + ", " + currentHuman.creativity + ", " + currentHuman.learnability);
         Debug.Log("Mental: " + currentHuman.emotionalStability + ", " + currentHuman.socialSkills + ", " + currentHuman.motivation);
@@ -192,8 +218,8 @@ public class CreatePanel : MonoBehaviour
 
     public enum Stage
     {
-        Physical,       
-        Intellectual,   
-        Mental        
+        Physical,
+        Intellectual,
+        Mental
     }
 }
