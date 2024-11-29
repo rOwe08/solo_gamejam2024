@@ -5,7 +5,7 @@ using UnityEngine;
 public class HumanManager : MonoBehaviour
 {
 
-    List<Human> listHumans;
+    public List<Human> listHumans;
 
     public HumanPanel manPanel;
     public HumanPanel womanPanel;
