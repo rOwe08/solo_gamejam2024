@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +23,13 @@ public class CreateButton : MonoBehaviour
             bool isFemale = transform.parent.name.Contains("WomanPanel");
 
             // Вызываем метод перемещения панели HumanPanel
-            humanPanel.MoveToTarget(() => StartCreatePanelMovement(isFemale));
+            humanPanel.MoveToTarget(() =>
+            {
+                // Подготавливаем CreatePanel
+                PrepareCreatePanel(isFemale);
+                // Перемещаем CreatePanel
+                StartCreatePanelMovement(isFemale);
+            });
         }
         else
         {
@@ -35,6 +40,11 @@ public class CreateButton : MonoBehaviour
     // Метод для начала анимации перемещения CreatePanel
     void StartCreatePanelMovement(bool isFemale)
     {
-        createPanel.PrepareAndMove(isFemale); // Передаем булеву переменную
+        createPanel.Move(isFemale); // Передаем булеву переменную
+    }
+
+    void PrepareCreatePanel(bool isFemale)
+    {
+        createPanel.Prepare(isFemale); // Передаем булеву переменную
     }
 }

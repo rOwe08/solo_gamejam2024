@@ -1,52 +1,59 @@
-using System.Collections;
-using UnityEngine;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CreatePanel : MonoBehaviour
 {
-    public Vector2 femaleStartPosition;    // Стартовая позиция для женщины
-    public Vector2 maleStartPosition;      // Стартовая позиция для мужчины
-    public Vector2 femaleTargetPosition;   // Целевая позиция для женщины
-    public Vector2 maleTargetPosition;     // Целевая позиция для мужчины
-    public float moveDuration = 0.5f;      // Длительность анимации
+    public TextMeshProUGUI titleText;                  // Текст для заголовка
+    public Slider physicalSlider;           // Слайдер для физического состояния
+    public Slider intellectualSlider;       // Слайдер для интеллектуального состояния
+    public Slider mentalSlider;             // Слайдер для ментального состояния
+
+    public Human currentHuman;              // Текущий человек (жена или муж)
+
+    public Vector2 femaleStartPosition;     // Стартовая позиция для женщины
+    public Vector2 maleStartPosition;       // Стартовая позиция для мужчины
+    public Vector2 femaleTargetPosition;    // Целевая позиция для женщины
+    public Vector2 maleTargetPosition;      // Целевая позиция для мужчины
+    public float moveDuration = 0.5f;       // Длительность анимации
 
     private RectTransform rectTransform;
     private Tween moveTween;
-    private Vector2 hiddenPosition;        // Скрытая позиция (будет обновляться перед анимацией)
+    private Vector2 hiddenPosition;         // Скрытая позиция
 
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
-    // Метод для подготовки панели перед анимацией и выбора стартовой и целевой позиции
-    public void PrepareAndMove(bool isFemale)
+    // Метод для подготовки CreatePanel с учетом выбранного пола
+    public void Prepare(bool isFemale)
     {
-        // Выбираем стартовую и целевую позицию в зависимости от пола
-        Vector2 startPosition = isFemale ? femaleStartPosition : maleStartPosition;
-        Vector2 targetPosition = isFemale ? femaleTargetPosition : maleTargetPosition;
+        // Создаем экземпляр нужного класса (Woman или Man)
+        currentHuman = isFemale ? new Woman() : new Man();
 
-        // Обновляем скрытую позицию как текущую стартовую позицию
+        // Обновляем текст заголовка
+        titleText.text = isFemale ? "Create Female" : "Create Male";
+
+        // Устанавливаем значения слайдеров в зависимости от текущего состояния
+        physicalSlider.value = currentHuman.physical;
+        intellectualSlider.value = currentHuman.intellectual;
+        mentalSlider.value = currentHuman.mental;
+
+        // Обновляем скрытую позицию
+        Vector2 startPosition = isFemale ? femaleStartPosition : maleStartPosition;
         hiddenPosition = startPosition;
 
-        StartCoroutine(PrepareCoroutine(startPosition, targetPosition));
-    }
-
-    private IEnumerator PrepareCoroutine(Vector2 startPosition, Vector2 targetPosition)
-    {
-        // Подготовка перед анимацией (например, пауза на 0.5 секунды)
-        yield return new WaitForSeconds(0.5f);
-
-        // Устанавливаем стартовую позицию
+        // Устанавливаем начальную позицию панели перед анимацией
         rectTransform.anchoredPosition = startPosition;
-
-        // Запуск анимации перемещения панели на целевую позицию
-        MoveToTarget(targetPosition);
     }
 
     // Метод для перемещения CreatePanel на целевую позицию
-    public void MoveToTarget(Vector2 targetPosition)
+    public void Move(bool isFemale)
     {
+        Vector2 targetPosition = isFemale ? femaleTargetPosition : maleTargetPosition;
+
         if (moveTween != null && moveTween.IsActive())
         {
             moveTween.Kill();
