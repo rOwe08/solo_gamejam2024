@@ -4,33 +4,28 @@ using DG.Tweening;
 
 public class CloseCreatePanelButton : MonoBehaviour
 {
-    public CreatePanel createPanel;  // Ссылка на CreatePanel
+    public CreatePanel createPanel;
 
-    public HumanPanel womanPanel;    // Ссылка на WomanPanel
-    public HumanPanel manPanel;      // Ссылка на ManPanel
+    public HumanPanel womanPanel;    
+    public HumanPanel manPanel;     
 
-    private HumanPanel activeHumanPanel;  // Активная панель, которую нужно вернуть
+    private HumanPanel activeHumanPanel;  
 
     void Start()
     {
-        // Добавление события на нажатие кнопки для вызова закрытия панели
         GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnButtonClick);
     }
 
-    // Метод, который будет вызываться при нажатии на кнопку
-    void OnButtonClick()
+    public void OnButtonClick()
     {
         if (createPanel != null)
         {
-            // Определяем, какая панель активна (женская или мужская)
             DetermineActiveHumanPanel();
 
             if (activeHumanPanel != null)
             {
-                // Сначала вызываем метод перемещения CreatePanel в скрытую позицию
                 createPanel.MoveToHidden();
 
-                // После завершения анимации перемещения CreatePanel, перемещаем активную HumanPanel
                 StartCoroutine(MoveHumanPanelAfterCreatePanel());
             }
             else
@@ -44,31 +39,26 @@ public class CloseCreatePanelButton : MonoBehaviour
         }
     }
 
-    // Метод для определения активной HumanPanel
     void DetermineActiveHumanPanel()
     {
-        // Сравниваем текущую позицию каждой панели с её стартовой позицией
         if (womanPanel.rectTransform.anchoredPosition != womanPanel.startPosition)
         {
-            activeHumanPanel = womanPanel; // Если позиция женщины изменилась, она активна
+            activeHumanPanel = womanPanel;
         }
         else if (manPanel.rectTransform.anchoredPosition != manPanel.startPosition)
         {
-            activeHumanPanel = manPanel; // Если позиция мужчины изменилась, он активен
+            activeHumanPanel = manPanel;
         }
         else
         {
-            activeHumanPanel = null; // Если обе панели на своих стартовых позициях
+            activeHumanPanel = null; 
         }
     }
 
-    // Корутин для синхронизации анимаций
     private IEnumerator MoveHumanPanelAfterCreatePanel()
     {
-        // Ожидаем завершения анимации перемещения CreatePanel
         yield return new WaitForSeconds(createPanel.moveDuration);
 
-        // После завершения анимации перемещения CreatePanel, перемещаем активную HumanPanel
         activeHumanPanel.MoveToStart();
     }
 }

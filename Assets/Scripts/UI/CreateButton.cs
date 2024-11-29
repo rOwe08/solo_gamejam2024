@@ -40,11 +40,11 @@ public class CreateButton : MonoBehaviour
     // Метод для начала анимации перемещения CreatePanel
     void StartCreatePanelMovement(bool isFemale)
     {
-        createPanel.Move(isFemale); // Передаем булеву переменную
+        createPanel.Move(isFemale);
     }
 
     void PrepareCreatePanel(bool isFemale)
     {
-        createPanel.Prepare(isFemale); // Передаем булеву переменную
+        createPanel.Prepare(isFemale);
     }
 }

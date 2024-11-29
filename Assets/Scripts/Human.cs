@@ -1,29 +1,28 @@
 public class Human
 {
-    // Физические характеристики
-    public float strength;      // Сила
-    public float endurance;     // Выносливость
-    public float agility;       // Ловкость
+    public string humanName;
 
-    // Интеллектуальные характеристики
-    public float logic;         // Логика
-    public float creativity;    // Креативность
-    public float learnability;  // Обучаемость
+    public float strength;      
+    public float endurance;     
+    public float agility;       
 
-    // Ментальные характеристики
-    public float emotionalStability;  // Эмоциональная устойчивость
-    public float socialSkills;        // Социальные навыки
-    public float motivation;          // Мотивация
+    public float logic;         
+    public float creativity;   
+    public float learnability;  
+
+    public float emotionalStability; 
+    public float socialSkills;        
+    public float motivation;         
 
     public Human()
     {
     }
 
-    // Конструктор для инициализации всех характеристик
-    public Human(float strength, float endurance, float agility,
+    public Human(string name, float strength, float endurance, float agility,
                  float logic, float creativity, float learnability,
                  float emotionalStability, float socialSkills, float motivation)
     {
+        this.humanName = name;
         this.strength = strength;
         this.endurance = endurance;
         this.agility = agility;
@@ -41,9 +40,9 @@ public class Human
 public class Woman : Human
 {
     public Woman()
-        : base(0f, 0f, 0f,  // Физические характеристики для женщины
-               0f, 0f, 0f,  // Интеллектуальные характеристики для женщины
-               0f, 0f, 0f)  // Ментальные характеристики для женщины
+        : base("Eva", 0f, 0f, 0f,
+               0f, 0f, 0f,
+               0f, 0f, 0f) 
     {
     }
 }
@@ -51,9 +50,9 @@ public class Woman : Human
 public class Man : Human
 {
     public Man()
-        : base(0f, 0f, 0f,  // Физические характеристики для мужчины
-               0f, 0f, 0f,  // Интеллектуальные характеристики для мужчины
-               0f, 0f, 0f)  // Ментальные характеристики для мужчины
+        : base("Adam", 0f, 0f, 0f, 
+               0f, 0f, 0f, 
+               0f, 0f, 0f) 
     {
     }
 }

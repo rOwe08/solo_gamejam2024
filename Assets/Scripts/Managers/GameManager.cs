@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -12,7 +9,7 @@ public class GameManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                FindAnyObjectByType(typeof(GameManager));
+                _instance = FindObjectOfType<GameManager>();
                 if (_instance == null)
                 {
                     GameObject obj = new GameObject("GameManager");
@@ -26,20 +23,19 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance != null)
+        if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject); 
         }
-        else
+        else if (_instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
     }
 
-
     void Update()
     {
-        
+
     }
 }

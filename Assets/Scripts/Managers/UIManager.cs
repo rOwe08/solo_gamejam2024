@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                FindAnyObjectByType(typeof(UIManager));
+                _instance = FindObjectOfType<UIManager>();
 
                 if (_instance == null)
                 {
@@ -28,14 +28,14 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance != null)
+        if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 

@@ -1,28 +1,31 @@
-using DG.Tweening;
+п»їusing DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CreatePanel : MonoBehaviour
 {
-    public TextMeshProUGUI titleText;        // Текст для заголовка
-    public Button confirmButton;            // Кнопка подтверждения
-    public Slider[] sliders;                // Массив слайдеров
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI infoText;
 
-    public Human currentHuman;              // Текущий человек (жена или муж)
+    public GameObject closeButton;
 
-    public Vector2 femaleStartPosition;     // Стартовая позиция для женщины
-    public Vector2 maleStartPosition;       // Стартовая позиция для мужчины
-    public Vector2 femaleTargetPosition;    // Целевая позиция для женщины
-    public Vector2 maleTargetPosition;      // Целевая позиция для мужчины
-    public float moveDuration = 0.5f;       // Длительность анимации
+    public Button confirmButton;
+    public Button resetButton;
+    public Slider[] sliders;                
+
+    public Human currentHuman;             
+
+    public Vector2 startPosition;     
+    public Vector2 targetPosition;    
+    public float moveDuration = 0.5f;       
 
     private RectTransform rectTransform;
     private Tween moveTween;
-    private Vector2 hiddenPosition;         // Скрытая позиция
+    private Vector2 hiddenPosition;        
 
-    private Stage currentStage;  // Текущий этап
-    private float[] sliderValues; // Значения слайдеров для каждого этапа
+    private Stage currentStage; 
+    private float[] sliderValues;
 
     void Start()
     {
@@ -31,89 +34,35 @@ public class CreatePanel : MonoBehaviour
         currentHuman = new Human();
         sliderValues = new float[sliders.Length];
 
-        // Настройка начальных значений
         confirmButton.onClick.AddListener(OnConfirmClicked);
+        resetButton.onClick.AddListener(ResetSliders);
         ShowStage(Stage.Physical);
     }
 
-    // Метод для отображения нужного этапа
     void ShowStage(Stage stage)
     {
         currentStage = stage;
 
-        // Скрываем все слайдеры
-        for (int i = 0; i < sliders.Length; i++)
-        {
-            sliders[i].gameObject.SetActive(false);
-        }
-
-        switch (stage)
-        {
-            case Stage.Physical:
-                titleText.text = "Select Physical Attributes";
-                sliders[0].gameObject.SetActive(true); // Сила
-                sliders[1].gameObject.SetActive(true); // Выносливость
-                sliders[2].gameObject.SetActive(true); // Ловкость
-                break;
-
-            case Stage.Intellectual:
-                titleText.text = "Select Intellectual Attributes";
-                sliders[3].gameObject.SetActive(true); // Логика
-                sliders[4].gameObject.SetActive(true); // Креативность
-                sliders[5].gameObject.SetActive(true); // Обучаемость
-                break;
-
-            case Stage.Mental:
-                titleText.text = "Select Mental Attributes";
-                sliders[6].gameObject.SetActive(true); // Эмоциональная устойчивость
-                sliders[7].gameObject.SetActive(true); // Социальные навыки
-                sliders[8].gameObject.SetActive(true); // Мотивация
-                break;
-        }
+        sliders[0].gameObject.SetActive(true);
+        sliders[1].gameObject.SetActive(true);
+        sliders[2].gameObject.SetActive(true);
     }
 
-    // Метод для подготовки CreatePanel с учетом выбранного пола
     public void Prepare(bool isFemale)
     {
-        // Создаем экземпляр нужного класса (Woman или Man)
+        currentStage = Stage.Physical;
+
         currentHuman = isFemale ? new Woman() : new Man();
-
-        // Обновляем текст заголовка
         titleText.text = isFemale ? "Create Female" : "Create Male";
+        UpdateCreatePanel();
 
-        switch (currentStage)
-        {
-            case Stage.Physical:
-                sliders[0].value = currentHuman.strength;
-                sliders[1].value = currentHuman.endurance;
-                sliders[2].value = currentHuman.agility;
-                break;
-
-            case Stage.Intellectual:
-                sliders[0].value = currentHuman.logic;
-                sliders[1].value = currentHuman.creativity;
-                sliders[2].value = currentHuman.learnability;
-                break;
-
-            case Stage.Mental:
-                sliders[0].value = currentHuman.emotionalStability;
-                sliders[1].value = currentHuman.socialSkills;
-                sliders[2].value = currentHuman.motivation;
-                break;
-        }
-        // Обновляем скрытую позицию
-        Vector2 startPosition = isFemale ? femaleStartPosition : maleStartPosition;
         hiddenPosition = startPosition;
 
-        // Устанавливаем начальную позицию панели перед анимацией
         rectTransform.anchoredPosition = startPosition;
     }
 
-    // Метод для перемещения CreatePanel на целевую позицию
     public void Move(bool isFemale)
     {
-        Vector2 targetPosition = isFemale ? femaleTargetPosition : maleTargetPosition;
-
         if (moveTween != null && moveTween.IsActive())
         {
             moveTween.Kill();
@@ -123,7 +72,6 @@ public class CreatePanel : MonoBehaviour
                                  .SetEase(Ease.InOutQuad);
     }
 
-    // Метод для возврата CreatePanel в скрытую позицию
     public void MoveToHidden()
     {
         if (moveTween != null && moveTween.IsActive())
@@ -131,24 +79,20 @@ public class CreatePanel : MonoBehaviour
             moveTween.Kill();
         }
 
-        // Перемещаем панель в скрытую позицию, которая была установлена ранее
         moveTween = rectTransform.DOAnchorPos(hiddenPosition, moveDuration)
                                  .SetEase(Ease.InOutQuad);
     }
 
-    // Обработчик нажатия на кнопку "Confirm"
     void OnConfirmClicked()
     {
-        // Сохраняем значения слайдеров в зависимости от текущего этапа
         for (int i = 0; i < sliders.Length; i++)
         {
-            if (sliders[i].gameObject.activeSelf) // Сохраняем только активные слайдеры
+            if (sliders[i].gameObject.activeSelf)
             {
                 sliderValues[i] = sliders[i].value;
             }
         }
 
-        // Применяем значения в зависимости от этапа
         switch (currentStage)
         {
             case Stage.Physical:
@@ -159,35 +103,97 @@ public class CreatePanel : MonoBehaviour
                 break;
 
             case Stage.Intellectual:
-                currentHuman.logic = sliderValues[3];
-                currentHuman.creativity = sliderValues[4];
-                currentHuman.learnability = sliderValues[5];
+                currentHuman.logic = sliderValues[0];
+                currentHuman.creativity = sliderValues[1];
+                currentHuman.learnability = sliderValues[2];
                 ShowStage(Stage.Mental);
                 break;
 
             case Stage.Mental:
-                currentHuman.emotionalStability = sliderValues[6];
-                currentHuman.socialSkills = sliderValues[7];
-                currentHuman.motivation = sliderValues[8];
-                CreateHuman(); // Создание персонажа
+                currentHuman.emotionalStability = sliderValues[0];
+                currentHuman.socialSkills = sliderValues[1];
+                currentHuman.motivation = sliderValues[2];
+                closeButton.GetComponent<CloseCreatePanelButton>().OnButtonClick();
+                CreateHuman();
                 break;
+        }
+
+        UpdateCreatePanel();
+    }
+
+    public void UpdateCreatePanel()
+    {
+        infoText.text = "Choose ";
+
+        switch (currentStage)
+        {
+            case Stage.Physical:
+            infoText.text += "Physical Parameters";
+            break;
+
+            case Stage.Intellectual:
+            infoText.text += "Intellectual Parameters";
+            break;
+
+            case Stage.Mental:
+            infoText.text += "Mental Parameters";
+            break;
+        }
+
+        switch (currentStage)
+        {
+            case Stage.Physical:
+            sliders[0].value = currentHuman.strength;
+            sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Strength";
+            sliders[1].value = currentHuman.endurance;
+            sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Endurance";
+            sliders[2].value = currentHuman.agility;
+            sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Agility";
+            break;
+
+            case Stage.Intellectual:
+            sliders[0].value = currentHuman.logic;
+            sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Logic";
+            sliders[1].value = currentHuman.creativity;
+            sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Creativity";
+            sliders[2].value = currentHuman.learnability;
+            sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Learnability";
+            break;
+
+            case Stage.Mental:
+            sliders[0].value = currentHuman.emotionalStability;
+            sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Emotional Stability";
+            sliders[1].value = currentHuman.socialSkills;
+            sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Social Skills";
+            sliders[2].value = currentHuman.motivation;
+            sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Motivation";
+            break;
         }
     }
 
-    // Метод для создания персонажа
+    private void ResetSliders()
+    {
+        foreach (Slider slider in sliders)
+        {
+            slider.value = 0;
+        }
+    }
+
     void CreateHuman()
     {
         Debug.Log("Character created!");
         Debug.Log("Physical: " + currentHuman.strength + ", " + currentHuman.endurance + ", " + currentHuman.agility);
         Debug.Log("Intellectual: " + currentHuman.logic + ", " + currentHuman.creativity + ", " + currentHuman.learnability);
         Debug.Log("Mental: " + currentHuman.emotionalStability + ", " + currentHuman.socialSkills + ", " + currentHuman.motivation);
-        // Здесь можно добавить логику создания персонажа
+
+        HumanManager.Instance.AddHuman(currentHuman);
+        HumanManager.Instance.AssignHuman(currentHuman);
     }
 
     public enum Stage
     {
-        Physical,       // Первый этап (физика)
-        Intellectual,   // Второй этап (интеллект)
-        Mental          // Третий этап (ментальные)
+        Physical,       
+        Intellectual,   
+        Mental        
     }
 }
