@@ -927,8 +927,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1188140993}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 10
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1258,9 +1258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 1483313321}
-  physicalSlider: {fileID: 1801483036}
-  intellectualSlider: {fileID: 1781382885}
-  mentalSlider: {fileID: 207639728}
+  confirmButton: {fileID: 1692326990}
+  sliders:
+  - {fileID: 1801483036}
+  - {fileID: 1781382885}
+  - {fileID: 207639728}
   femaleStartPosition: {x: -350, y: 1200}
   maleStartPosition: {x: 350, y: 1200}
   femaleTargetPosition: {x: -350, y: 0}
@@ -1646,7 +1648,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Reset
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3736,8 +3738,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1866167105}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 10
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3963,8 +3965,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 106490439}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 10
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
