@@ -1,53 +1,50 @@
-﻿public class Human
+﻿using System.Collections.Generic;
+
+public class Human
 {
     public string humanName;
 
-    public float strength;
-    public float endurance;
-    public float agility;
-
-    public float logic;
-    public float creativity;
-    public float learnability;
-
-    public float emotionalStability;
-    public float socialSkills;
-    public float motivation;
+    // Список характеристик
+    public List<Stat> Stats { get; private set; }
 
     public Human()
     {
+        Stats = new List<Stat>();
     }
 
     public Human(string name, float strength, float endurance, float agility,
                  float logic, float creativity, float learnability,
                  float emotionalStability, float socialSkills, float motivation)
     {
-        this.humanName = name;
-        this.strength = strength;
-        this.endurance = endurance;
-        this.agility = agility;
+        humanName = name;
+        Stats = new List<Stat>
+        {
+            new Stat("Strength", "STR", strength),                  // Сила
+            new Stat("Endurance", "END", endurance),                // Выносливость
+            new Stat("Agility", "AGI", agility),                    // Ловкость
+            new Stat("Logic", "LOG", logic),                        // Логика
+            new Stat("Creativity", "CRE", creativity),              // Креативность
+            new Stat("Learnability", "LRN", learnability),          // Обучаемость
+            new Stat("Emotional Stability", "EMO", emotionalStability), // Эмоциональная стабильность
+            new Stat("Social Skills", "SOC", socialSkills),         // Социальные навыки
+            new Stat("Motivation", "MOT", motivation)               // Мотивация
+        };
 
-        this.logic = logic;
-        this.creativity = creativity;
-        this.learnability = learnability;
-
-        this.emotionalStability = emotionalStability;
-        this.socialSkills = socialSkills;
-        this.motivation = motivation;
     }
 
-    // Метод для получения общего рейтинга (среднего значения всех характеристик)
+    // Метод для получения общего рейтинга
     public float GetOverallRating()
     {
-        float total = strength + endurance + agility
-                    + logic + creativity + learnability
-                    + emotionalStability + socialSkills + motivation;
+        float total = 0;
+        foreach (Stat stat in Stats)
+        {
+            total += stat.Value;
+        }
 
-        int numOfAttributes = 9;  // Всего 9 характеристик
-
-        return total / numOfAttributes;
+        return total / Stats.Count;
     }
 }
+
 
 
 public class Woman : Human
