@@ -137,9 +137,47 @@ public class SimulationManager : MonoBehaviour
 
     public void ApplyResult(string result)
     {
+        // Разделяем результат, чтобы получить статы и их значения
+        string[] resultParts = result.Split(' ');
 
+        // Если результат состоит из нескольких частей, то обработаем каждую часть
+        if (resultParts.Length == 2)
+        {
+            string statAbbreviation = resultParts[0]; // Аббревиатура статы (например, "CUL")
+            float statChange = float.Parse(resultParts[1]); // Изменение статы (например, "+1" или "-1")
 
+            // Находим соответствующую стату в humanityStats
+            Stat statToUpdate = humanityStats.Find(stat => stat.Abbreviation == statAbbreviation);
+
+            if (statToUpdate == null)
+            {
+                statToUpdate = abstractStats.Find(stat => stat.Abbreviation == statAbbreviation);
+
+                if (statToUpdate == null)
+                {
+                    Debug.Log($"{statAbbreviation}DOESNT EXIST!");
+                }
+                else
+                {
+                    // Применяем изменение
+                    statToUpdate.Value += statChange;
+
+                    // Обновляем UI с новым значением статы
+                    UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractPanel");
+                }
+            }
+            else
+            {
+                // Применяем изменение
+                statToUpdate.Value += statChange;
+
+                // Обновляем UI с новым значением статы
+                UIManager.Instance.UpdateStatsPanel(humanityStats, "StatsPanel");
+            }
+        }
+        
     }
+
 
     IEnumerator WinGame()
     {

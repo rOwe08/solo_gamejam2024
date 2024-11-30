@@ -77,8 +77,6 @@ public class HumanManager : MonoBehaviour
             // Assign the new human to the woman panel
             womanPanel.AssignHuman(human);
         }
-
-        Debug.Log("Human assigned. Total humans in list: " + listHumans.Count);
     }
 
     public void AddHuman(Human human)
