@@ -31,6 +31,39 @@ public class SimulationManager : MonoBehaviour
     public List<Era> eras = new List<Era>();
     public int currentEraIndex = 0;
 
+
+    private static SimulationManager _instance;
+    public static SimulationManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SimulationManager>();
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject("SimulationManager");
+                    _instance = obj.AddComponent<SimulationManager>();
+                }
+            }
+
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         man = HumanManager.Instance.chosenMan;
@@ -103,6 +136,12 @@ public class SimulationManager : MonoBehaviour
             string abbreviation = manStats[i].Abbreviation;
             humanityStats.Add(new Stat(manStats[i].Name, abbreviation, averageValue));
         }
+    }
+
+    public void ApplyResult(string result)
+    {
+
+
     }
 
     // Check the events for the "Primitive Society" era

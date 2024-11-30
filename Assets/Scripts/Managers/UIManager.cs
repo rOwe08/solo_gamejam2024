@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
 
     public GameObject answerButtonPrefab;
 
+    private GameObject questCanvas;
+    private GameObject questPanel;
+    private GameObject buttonsLayout;
+
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
     private CanvasGroup transitionCanvasGroup;
@@ -122,9 +126,18 @@ public class UIManager : MonoBehaviour
     // Function to display the quest and wait for user interaction
     public IEnumerator DisplayQuest(Quest quest)
     {
-        GameObject questCanvas = GameObject.Find("QuestCanvas");
-        GameObject questPanel = questCanvas.transform.Find("QuestPanel").gameObject;
-        GameObject buttonsLayout = questPanel.transform.Find("ButtonsLayout").gameObject;
+        if (questCanvas == null)
+        {
+            questCanvas = GameObject.Find("QuestCanvas");
+        }
+        if (questPanel == null)
+        {
+            questPanel = questCanvas.transform.Find("QuestPanel").gameObject;
+        }
+        if (buttonsLayout == null)
+        {
+            buttonsLayout = questPanel.transform.Find("ButtonsLayout").gameObject;
+        }
 
         // Display the quest's title and description
         questPanel.SetActive(true); // Show the quest panel
@@ -145,20 +158,23 @@ public class UIManager : MonoBehaviour
             buttonText.text = quest.Answers[i].Description;
             resultText.text = quest.Answers[i].Result;
 
+            // Use a local variable to capture the current value of 'i'
+            int answerIndex = i;
+
             // Add the OnClick listener to trigger the selected answer's action
             Button button = answerButton.GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
                 // Invoke the selected answer's action
-                quest.Answers[i].OnChosen?.Invoke();
+                quest.Answers[answerIndex].OnChosen?.Invoke();
 
                 // Hide the quest canvas after the answer is selected
-                questCanvas.SetActive(false);
+                questPanel.SetActive(false);
             });
         }
 
         // Wait for the user to select an answer (button click)
-        yield return new WaitUntil(() => !questCanvas.activeSelf); // Wait until the quest canvas is hidden
+        yield return new WaitUntil(() => !questPanel.activeSelf); // Wait until the quest canvas is hidden
 
         // After the quest is answered, you can proceed with other actions
         yield return new WaitForSeconds(1f);  // Optionally wait before moving on

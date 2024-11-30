@@ -11,11 +11,20 @@ public class QuestAnswer
     public Action OnChosen;
 
     // Constructor to initialize the quest answer
-    public QuestAnswer(string description, string result, Action onChosen)
+    public QuestAnswer(string description, string result, Action onChosen = null)
     {
         Description = description;
         Result = result;
-        OnChosen = onChosen;
+
+        // If onChosen is null, assign the default action
+        if (onChosen == null)
+        {
+            OnChosen = () => SimulationManager.Instance.ApplyResult(result);
+        }
+        else
+        {
+            OnChosen = onChosen;
+        }
     }
 }
 
