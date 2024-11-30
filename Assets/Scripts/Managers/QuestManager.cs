@@ -48,9 +48,9 @@ public class QuestManager : MonoBehaviour
                 "The humans are discovering tools for the first time. What should they prioritize?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Prioritize strength", () => { /* Increase strength logic */ }),
-                new QuestAnswer("Focus on creativity", () => { /* Increase creativity */ }),
-                new QuestAnswer("Focus on survival", () => { /* Increase endurance */ })
+                    new QuestAnswer("Prioritize strength", "STR +1", () => { /* Increase strength logic */ }),
+                    new QuestAnswer("Focus on creativity", "CRE +1", () => { /* Increase creativity */ }),
+                    new QuestAnswer("Focus on survival", "END +1", () => { /* Increase endurance */ })
                 }
             ));
 
@@ -59,9 +59,9 @@ public class QuestManager : MonoBehaviour
                 "The discovery of fire will change humanity's future. What should it be used for?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Warmth and cooking", () => { /* Increase comfort */ }),
-                new QuestAnswer("Weaponry and defense", () => { /* Increase defense */ }),
-                new QuestAnswer("Rituals and community bonding", () => { /* Increase social cohesion */ })
+                    new QuestAnswer("Warmth and cooking", "COM +1", () => { /* Increase comfort */ }),
+                    new QuestAnswer("Weaponry and defense", "DEF +1", () => { /* Increase defense */ }),
+                    new QuestAnswer("Rituals and community bonding", "SOC +1", () => { /* Increase social cohesion */ })
                 }
             ));
 
@@ -70,9 +70,9 @@ public class QuestManager : MonoBehaviour
                 "Humans are learning to build shelters. What is the best way to design them?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Build compact and sturdy shelters", () => { /* Increase survival */ }),
-                new QuestAnswer("Build large communal shelters", () => { /* Increase social unity */ }),
-                new QuestAnswer("Build temporary shelters for mobility", () => { /* Increase exploration */ })
+                    new QuestAnswer("Build compact and sturdy shelters", "SUR +1", () => { /* Increase survival */ }),
+                    new QuestAnswer("Build large communal shelters", "SOC +1", () => { /* Increase social unity */ }),
+                    new QuestAnswer("Build temporary shelters for mobility", "EXP +1", () => { /* Increase exploration */ })
                 }
             ));
 
@@ -81,9 +81,9 @@ public class QuestManager : MonoBehaviour
                 "Should humanity prioritize hunting or farming as their primary food source?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Focus on hunting for meat", () => { /* Increase hunting skill */ }),
-                new QuestAnswer("Focus on farming for stable food", () => { /* Increase agriculture */ }),
-                new QuestAnswer("Focus on a balanced approach", () => { /* Increase resource management */ })
+                    new QuestAnswer("Focus on hunting for meat", "HUN +1", () => { /* Increase hunting skill */ }),
+                    new QuestAnswer("Focus on farming for stable food", "AGRI +1", () => { /* Increase agriculture */ }),
+                    new QuestAnswer("Focus on a balanced approach", "RES +1", () => { /* Increase resource management */ })
                 }
             ));
 
@@ -92,9 +92,9 @@ public class QuestManager : MonoBehaviour
                 "Humans are starting to communicate. What form of language should they adopt?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Simple gestures and sounds", () => { /* Increase communication efficiency */ }),
-                new QuestAnswer("Develop complex spoken language", () => { /* Increase intellectual growth */ }),
-                new QuestAnswer("Develop written language", () => { /* Increase record keeping */ })
+                    new QuestAnswer("Simple gestures and sounds", "COM +1", () => { /* Increase communication efficiency */ }),
+                    new QuestAnswer("Develop complex spoken language", "INT +1", () => { /* Increase intellectual growth */ }),
+                    new QuestAnswer("Develop written language", "REC +1", () => { /* Increase record keeping */ })
                 }
             ));
         }
@@ -107,9 +107,9 @@ public class QuestManager : MonoBehaviour
                 "A system of writing is emerging. How should it be used?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("For trade and commerce", () => { /* Increase economy */ }),
-                new QuestAnswer("For religious texts", () => { /* Increase spiritual influence */ }),
-                new QuestAnswer("For historical record-keeping", () => { /* Increase knowledge */ })
+                    new QuestAnswer("For trade and commerce", "ECO +1", () => { /* Increase economy */ }),
+                    new QuestAnswer("For religious texts", "REL +1", () => { /* Increase spiritual influence */ }),
+                    new QuestAnswer("For historical record-keeping", "KNO +1", () => { /* Increase knowledge */ })
                 }
             ));
 
@@ -118,9 +118,9 @@ public class QuestManager : MonoBehaviour
                 "The first war has broken out. Should we focus on offense or defense?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Focus on offense to conquer", () => { /* Increase military power */ }),
-                new QuestAnswer("Focus on defense to protect", () => { /* Increase fortifications */ }),
-                new QuestAnswer("Focus on diplomacy to avoid war", () => { /* Increase relations */ })
+                    new QuestAnswer("Focus on offense to conquer", "MIL +1", () => { /* Increase military power */ }),
+                    new QuestAnswer("Focus on defense to protect", "DEF +1", () => { /* Increase fortifications */ }),
+                    new QuestAnswer("Focus on diplomacy to avoid war", "REL +1", () => { /* Increase relations */ })
                 }
             ));
 
@@ -129,9 +129,9 @@ public class QuestManager : MonoBehaviour
                 "A monarchy is being established. How should the leader be chosen?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Through divine right", () => { /* Increase religion influence */ }),
-                new QuestAnswer("Through election by the people", () => { /* Increase democracy */ }),
-                new QuestAnswer("Through hereditary monarchy", () => { /* Increase nobility power */ })
+                    new QuestAnswer("Through divine right", "REL +1", () => { /* Increase religion influence */ }),
+                    new QuestAnswer("Through election by the people", "DEM +1", () => { /* Increase democracy */ }),
+                    new QuestAnswer("Through hereditary monarchy", "NOB +1", () => { /* Increase nobility power */ })
                 }
             ));
 
@@ -140,9 +140,9 @@ public class QuestManager : MonoBehaviour
                 "Should we build a massive monument for the pharaoh or use resources elsewhere?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Build the pyramid to honor the pharaoh", () => { /* Increase religious influence */ }),
-                new QuestAnswer("Use resources for public works", () => { /* Increase public happiness */ }),
-                new QuestAnswer("Focus on military development", () => { /* Increase military power */ })
+                    new QuestAnswer("Build the pyramid to honor the pharaoh", "REL +1", () => { /* Increase religious influence */ }),
+                    new QuestAnswer("Use resources for public works", "HAP +1", () => { /* Increase public happiness */ }),
+                    new QuestAnswer("Focus on military development", "MIL +1", () => { /* Increase military power */ })
                 }
             ));
 
@@ -151,9 +151,9 @@ public class QuestManager : MonoBehaviour
                 "A code of laws is being proposed. What should it focus on?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Focus on property rights", () => { /* Increase economy */ }),
-                new QuestAnswer("Focus on religious morality", () => { /* Increase spiritual strength */ }),
-                new QuestAnswer("Focus on equality for all", () => { /* Increase social stability */ })
+                    new QuestAnswer("Focus on property rights", "ECO +1", () => { /* Increase economy */ }),
+                    new QuestAnswer("Focus on religious morality", "REL +1", () => { /* Increase spiritual strength */ }),
+                    new QuestAnswer("Focus on equality for all", "SOC +1", () => { /* Increase social stability */ })
                 }
             ));
         }
@@ -166,9 +166,9 @@ public class QuestManager : MonoBehaviour
                 "Feudalism is spreading. Should we embrace it fully or limit its power?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Embrace feudalism for stability", () => { /* Increase control */ }),
-                new QuestAnswer("Limit feudal power for fairness", () => { /* Increase equality */ }),
-                new QuestAnswer("Focus on a different system entirely", () => { /* Increase innovation */ })
+                    new QuestAnswer("Embrace feudalism for stability", "CON +1", () => { /* Increase control */ }),
+                    new QuestAnswer("Limit feudal power for fairness", "EQL +1", () => { /* Increase equality */ }),
+                    new QuestAnswer("Focus on a different system entirely", "INN +1", () => { /* Increase innovation */ })
                 }
             ));
 
@@ -177,9 +177,9 @@ public class QuestManager : MonoBehaviour
                 "A call for a crusade has been made. Should we join or stay neutral?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Join the crusade for religious glory", () => { /* Increase religious influence */ }),
-                new QuestAnswer("Stay neutral to avoid conflict", () => { /* Increase peace */ }),
-                new QuestAnswer("Oppose the crusade for justice", () => { /* Increase moral authority */ })
+                    new QuestAnswer("Join the crusade for religious glory", "REL +1", () => { /* Increase religious influence */ }),
+                    new QuestAnswer("Stay neutral to avoid conflict", "PEA +1", () => { /* Increase peace */ }),
+                    new QuestAnswer("Oppose the crusade for justice", "MOR +1", () => { /* Increase moral authority */ })
                 }
             ));
 
@@ -188,9 +188,9 @@ public class QuestManager : MonoBehaviour
                 "A plague has struck. What measures should we take?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Quarantine affected areas", () => { /* Increase health security */ }),
-                new QuestAnswer("Focus on finding a cure", () => { /* Increase scientific research */ }),
-                new QuestAnswer("Pray for divine intervention", () => { /* Increase faith */ })
+                    new QuestAnswer("Quarantine affected areas", "HEA +1", () => { /* Increase health security */ }),
+                    new QuestAnswer("Focus on finding a cure", "RES +1", () => { /* Increase scientific research */ }),
+                    new QuestAnswer("Pray for divine intervention", "FAI +1", () => { /* Increase faith */ })
                 }
             ));
 
@@ -199,9 +199,9 @@ public class QuestManager : MonoBehaviour
                 "The Renaissance is coming. Should we support the arts or focus on military development?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Support art and culture", () => { /* Increase culture */ }),
-                new QuestAnswer("Focus on military power", () => { /* Increase defense */ }),
-                new QuestAnswer("Support a balance between the two", () => { /* Increase balance */ })
+                    new QuestAnswer("Support art and culture", "CUL +1", () => { /* Increase culture */ }),
+                    new QuestAnswer("Focus on military power", "DEF +1", () => { /* Increase defense */ }),
+                    new QuestAnswer("Support a balance between the two", "BAL +1", () => { /* Increase balance */ })
                 }
             ));
 
@@ -210,9 +210,9 @@ public class QuestManager : MonoBehaviour
                 "The printing press is invented. Should we support its widespread use?",
                 new List<QuestAnswer>
                 {
-                new QuestAnswer("Support the spread of knowledge", () => { /* Increase education */ }),
-                new QuestAnswer("Control information for control", () => { /* Increase control */ }),
-                new QuestAnswer("Limit its use to the elite", () => { /* Increase aristocracy power */ })
+                    new QuestAnswer("Support the spread of knowledge", "EDU +1", () => { /* Increase education */ }),
+                    new QuestAnswer("Control information for control", "CON +1", () => { /* Increase control */ }),
+                    new QuestAnswer("Limit its use to the elite", "ARI +1", () => { /* Increase aristocracy power */ })
                 }
             ));
         }

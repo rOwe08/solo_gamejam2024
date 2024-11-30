@@ -138,10 +138,12 @@ public class UIManager : MonoBehaviour
         {
             // Instantiate the button from the prefab
             GameObject answerButton = Instantiate(answerButtonPrefab, buttonsLayout.transform);
-            TextMeshProUGUI buttonText = answerButton.GetComponentInChildren<TextMeshProUGUI>(); // Find the text component inside the button prefab
+            TextMeshProUGUI buttonText = answerButton.transform.Find("ButtonText").GetComponent<TextMeshProUGUI>(); // Find the text component inside the button prefab
+            TextMeshProUGUI resultText = answerButton.transform.Find("ResultText").GetComponent<TextMeshProUGUI>(); // Find the text component inside the button prefab
 
             // Set the button text to the answer's text
-            buttonText.text = quest.Answers[i].Text;
+            buttonText.text = quest.Answers[i].Description;
+            resultText.text = quest.Answers[i].Result;
 
             // Add the OnClick listener to trigger the selected answer's action
             Button button = answerButton.GetComponent<Button>();

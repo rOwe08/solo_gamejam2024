@@ -5,13 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class QuestAnswer
 {
-    public string Text;
+    public string Description;
+    public string Result;
+
     public Action OnChosen;
 
     // Constructor to initialize the quest answer
-    public QuestAnswer(string text, Action onChosen)
+    public QuestAnswer(string description, string result, Action onChosen)
     {
-        Text = text;
+        Description = description;
+        Result = result;
         OnChosen = onChosen;
     }
 }
