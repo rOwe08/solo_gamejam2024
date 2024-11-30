@@ -3,12 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq; // Для работы с LINQ
-using System.Collections.Generic; // Для работы со списками
+using System.Collections.Generic;
+using System; // Для работы со списками
 
 public class CreatePanel : MonoBehaviour
 {
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI infoText;
+    public TextMeshProUGUI pointsText;
 
     public GameObject closeButton;
 
@@ -38,6 +40,8 @@ public class CreatePanel : MonoBehaviour
         confirmButton.onClick.AddListener(OnConfirmClicked);
         resetButton.onClick.AddListener(ResetSliders);
         ShowStage(Stage.Physical);
+
+        UIManager.Instance.createPanel = this;
     }
 
     void ShowStage(Stage stage)
@@ -150,16 +154,34 @@ public class CreatePanel : MonoBehaviour
                 sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Endurance";
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Agility").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Agility";
+
+                int tempPhysValues = 0;
+
+                foreach (Slider slider in sliders)
+                {
+                    tempPhysValues += (int)slider.value;
+                }
+
+                pointsText.text = $"Available points: {GameManager.Instance.physicsPoints - tempPhysValues}/{GameManager.Instance.physicsPoints}";
                 break;
 
             case Stage.Intellectual:
                 infoText.text += "Intellectual Parameters";
                 sliders[0].value = currentHuman.Stats.First(stat => stat.Name == "Logic").Value;
+
                 sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Logic";
                 sliders[1].value = currentHuman.Stats.First(stat => stat.Name == "Creativity").Value;
                 sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Creativity";
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Learnability").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Learnability";
+
+                int tempIntValues = 0;
+                foreach (Slider slider in sliders)
+                {
+                    tempIntValues += (int)slider.value;
+                }
+
+                pointsText.text = $"Available points: {GameManager.Instance.intellectPoints - tempIntValues}/{GameManager.Instance.intellectPoints}";
                 break;
 
             case Stage.Mental:
@@ -170,6 +192,14 @@ public class CreatePanel : MonoBehaviour
                 sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Social Skills";
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Motivation").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Motivation";
+
+                int tempMenValues = 0;
+                foreach (Slider slider in sliders)
+                {
+                    tempMenValues += (int)slider.value;
+                }
+
+                pointsText.text = $"Available points: {GameManager.Instance.mentalPoints - tempMenValues}/{GameManager.Instance.mentalPoints}";
                 break;
         }
     }
@@ -186,6 +216,31 @@ public class CreatePanel : MonoBehaviour
     {
         HumanManager.Instance.AddHuman(currentHuman);
         HumanManager.Instance.AssignHuman(currentHuman);
+    }
+
+    internal void UpdateAvailablePoints()
+    {
+        int tempValue = 0;
+
+        foreach(Slider slider in sliders)
+        {
+            tempValue += (int)slider.value;
+        }
+
+        switch (currentStage)
+        {
+            case Stage.Physical:
+                pointsText.text = $"Available points: {GameManager.Instance.physicsPoints - tempValue}/{GameManager.Instance.physicsPoints}";
+                break;
+
+            case Stage.Intellectual:
+                pointsText.text = $"Available points: {GameManager.Instance.intellectPoints - tempValue}/{GameManager.Instance.intellectPoints}";
+                break;
+
+            case Stage.Mental:
+                pointsText.text = $"Available points: {GameManager.Instance.mentalPoints - tempValue}/{GameManager.Instance.mentalPoints}";
+                break;
+        }
     }
 
     public enum Stage

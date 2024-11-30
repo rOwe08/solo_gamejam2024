@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public HumanPanel manPanel;
     public Button startButton;
     private PulsingObject pulsingStartButton;
+    public CreatePanel createPanel;
 
     public GameObject answerButtonPrefab;
     public GameObject eventPrefab;
@@ -388,5 +389,13 @@ public class UIManager : MonoBehaviour
 
         // Начинаем уменьшать альфу с 1 до 0
         transitionCanvasGroup.DOFade(0, 1f);
+    }
+
+    public void UpdateAvailablePoints()
+    {
+        if (createPanel != null)
+        {
+            createPanel.UpdateAvailablePoints();
+        }
     }
 }

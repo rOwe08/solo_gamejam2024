@@ -26,5 +26,6 @@ public class StatSliderScript : MonoBehaviour
     void UpdateNumberText(float value)
     {
         numberText.text = value.ToString("0"); // Преобразуем значение в строку (целое число)
+        UIManager.Instance.UpdateAvailablePoints();
     }
 }

@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public int physicsPoints = 5;
+    public int intellectPoints = 5;
+    public int mentalPoints = 5;
+
     public static GameManager Instance
     {
         get
