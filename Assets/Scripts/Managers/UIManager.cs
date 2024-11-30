@@ -60,9 +60,6 @@ public class UIManager : MonoBehaviour
     {
         // Получаем компонент PulsingObject для кнопки
         pulsingStartButton = startButton.GetComponent<PulsingObject>();
-
-        // Делаем transitionImage тоже DontDestroyOnLoad
-        DontDestroyOnLoad(transitionImage.gameObject);
     }
 
     void Update()
@@ -234,7 +231,7 @@ public class UIManager : MonoBehaviour
         {
             // Load the previous scene or desired scene
             // Replace "PreviousScene" with the actual scene name or use SceneManager.LoadScene("YourSceneName");
-            SceneManager.LoadScene("GeneratingScene"); // Change this to your desired scene name
+            GameManager.Instance.LoadNextScene("GeneratingScene"); // Change this to your desired scene name
         }
         else
         {
@@ -317,13 +314,7 @@ public class UIManager : MonoBehaviour
 
     public void OnStartButtonClicked()
     {
-        Debug.Log("Start button pressed");
-        // Запускаем анимацию для плавного увеличения альфы с использованием CanvasGroup
-        transitionCanvasGroup.DOFade(1, 1f).OnComplete(() =>
-        {
-            // После завершения анимации загрузим следующую сцену
-            LoadNextScene();
-        });
+        GameManager.Instance.LoadNextScene("SimulationScene");
     }
 
     public void ChangeSimulationBackground(Sprite sprite)
@@ -334,19 +325,10 @@ public class UIManager : MonoBehaviour
         backgroundImage.sprite = sprite;
     }
 
-    private void LoadNextScene()
-    {
-        // Загрузка следующей сцены
-        SceneManager.LoadScene("SimulationScene"); // Замените на имя вашей сцены
-
-        // Начинаем анимацию перехода в следующей сцене
-        StartCoroutine(WaitForSceneAndFadeOut());
-    }
-
-    private IEnumerator WaitForSceneAndFadeOut()
+    public IEnumerator WaitForSceneAndFadeOut(float delay = 1f)
     {
         // Ждем пока сцена загрузится
-        yield return new WaitForSeconds(1f);  // Это зависит от длительности анимации, подберите нужное время
+        yield return new WaitForSeconds(delay);  // Это зависит от длительности анимации, подберите нужное время
 
         // Начинаем уменьшать альфу с 1 до 0
         transitionCanvasGroup.DOFade(0, 1f);

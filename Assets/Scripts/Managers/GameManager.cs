@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +41,24 @@ public class GameManager : MonoBehaviour
         GameObject simulationManager = GameObject.Find("SimulationManager");
 
         simulationManager.GetComponent<SimulationManager>().ApplyResult(result); 
+    }
+
+    public void LoadNextScene(string sceneName)
+    {
+        UIManager.Instance.transitionCanvasGroup.DOFade(1, 1f).OnComplete(() =>
+        {
+            // После завершения анимации загрузим следующую сцену
+            GameManager.Instance.LoadScene(sceneName);
+        });
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        // Загрузка следующей сцены
+        SceneManager.LoadScene(sceneName); // Замените на имя вашей сцены
+
+        // Начинаем анимацию перехода в следующей сцене
+        UIManager.Instance.StartCoroutine(UIManager.Instance.WaitForSceneAndFadeOut());
     }
 
     void Update()

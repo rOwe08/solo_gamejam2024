@@ -132,6 +132,8 @@ public class SimulationManager : MonoBehaviour
     IEnumerator WinGame()
     {
         yield return new WaitForSeconds(1f);
+
+        StartCoroutine(UIManager.Instance.ShowMessage("You Win!", "Back:)"));
         Debug.Log("YOU WIN!");
     }
 

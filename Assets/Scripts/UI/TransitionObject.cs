@@ -12,10 +12,12 @@ public class TransitionObject : MonoBehaviour
         // Изначально устанавливаем альфу в 0
         if (UIManager.Instance.transitionCanvasGroup != null)
         {
-            UIManager.Instance.transitionCanvasGroup.alpha = 0;
+            UIManager.Instance.transitionCanvasGroup.alpha = 1;
             UIManager.Instance.transitionCanvasGroup.interactable = false; // Отключаем взаимодействие, чтобы другие элементы UI были активны
             UIManager.Instance.transitionCanvasGroup.blocksRaycasts = false; // Отключаем блокировку кликов
         }
+
+        UIManager.Instance.StartCoroutine(UIManager.Instance.WaitForSceneAndFadeOut(0f));
     }
 
     // Update is called once per frame
