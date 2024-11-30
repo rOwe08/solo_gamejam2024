@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
-    private CanvasGroup transitionCanvasGroup;
+    public CanvasGroup transitionCanvasGroup;
 
     public static UIManager Instance
     {
@@ -61,42 +61,32 @@ public class UIManager : MonoBehaviour
         // Получаем компонент PulsingObject для кнопки
         pulsingStartButton = startButton.GetComponent<PulsingObject>();
 
-        // Получаем CanvasGroup на объекте перехода
-        transitionCanvasGroup = transitionImage.GetComponent<CanvasGroup>();
-
-        // Изначально устанавливаем альфу в 0
-        if (transitionCanvasGroup != null)
-        {
-            transitionCanvasGroup.alpha = 0;
-            transitionCanvasGroup.interactable = false; // Отключаем взаимодействие, чтобы другие элементы UI были активны
-            transitionCanvasGroup.blocksRaycasts = false; // Отключаем блокировку кликов
-        }
-
-        startButton.onClick.AddListener(OnStartButtonClicked);
-
         // Делаем transitionImage тоже DontDestroyOnLoad
         DontDestroyOnLoad(transitionImage.gameObject);
     }
 
     void Update()
     {
-        // Проверяем, назначены ли оба персонажа
-        if (womanPanel.assignedHuman != null && manPanel.assignedHuman != null)
+        if (SceneManager.GetActiveScene().name == "GeneratingScene")
         {
-            // Делаем кнопку доступной для нажатия и активируем пульсацию
-            startButton.interactable = true;
-            if (pulsingStartButton != null)
+            // Проверяем, назначены ли оба персонажа
+            if (womanPanel.assignedHuman != null && manPanel.assignedHuman != null)
             {
-                pulsingStartButton.isActive = true;  // Включаем пульсацию
+                // Делаем кнопку доступной для нажатия и активируем пульсацию
+                startButton.interactable = true;
+                if (pulsingStartButton != null)
+                {
+                    pulsingStartButton.isActive = true;  // Включаем пульсацию
+                }
             }
-        }
-        else
-        {
-            // Если хотя бы один персонаж не назначен, делаем кнопку недоступной и останавливаем пульсацию
-            startButton.interactable = false;
-            if (pulsingStartButton != null)
+            else
             {
-                pulsingStartButton.isActive = false;  // Останавливаем пульсацию
+                // Если хотя бы один персонаж не назначен, делаем кнопку недоступной и останавливаем пульсацию
+                startButton.interactable = false;
+                if (pulsingStartButton != null)
+                {
+                    pulsingStartButton.isActive = false;  // Останавливаем пульсацию
+                }
             }
         }
     }
@@ -192,7 +182,7 @@ public class UIManager : MonoBehaviour
 
 
 // Function to display the message and wait for button click
-public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
+    public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
     {
         GameObject messageCanvas = GameObject.Find("MessageCanvas");
 
@@ -239,8 +229,18 @@ public IEnumerator ShowMessage(string message, string textForButton = "OK", floa
             yield return null; // Wait one frame and check again
         }
 
-        // After button click, hide the message panel
-        HideMessage();
+        // After button click, check if the button text contains "Back"
+        if (textForButton.Contains("Back"))
+        {
+            // Load the previous scene or desired scene
+            // Replace "PreviousScene" with the actual scene name or use SceneManager.LoadScene("YourSceneName");
+            SceneManager.LoadScene("GeneratingScene"); // Change this to your desired scene name
+        }
+        else
+        {
+            // If not "Back", just hide the message
+            HideMessage();
+        }
     }
 
     // Метод для отображения сообщения, теперь принимает объект Era
@@ -260,29 +260,34 @@ public IEnumerator ShowMessage(string message, string textForButton = "OK", floa
             descriptionText = "The Rise of Ancient Civilization";
             textForConfirmButton = "Great empires are forming. Will they focus on war or peace?";
         }
+        else if (era.eraName.Contains("Antiquity"))
+        {
+            descriptionText = "Antiquity era";
+            textForConfirmButton = "Great empires are forming. Will they focus on war or peace?";
+        }
         else if (era.eraName.Contains("Middle"))
         {
-            descriptionText = "The Middle Ages";
+            descriptionText = "The Middle Ages Era";
             textForConfirmButton = "Knights, castles, and kingdoms are emerging. What path will humanity choose?";
         }
         else if (era.eraName.Contains("Renaissance"))
         {
-            descriptionText = "The Renaissance";
+            descriptionText = "The Renaissance Era";
             textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
         }
         else if (era.eraName.Contains("Modern"))
         {
-            descriptionText = "The Renaissance";
+            descriptionText = "Modern Era";
             textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
         }
         else if (era.eraName.Contains("Our"))
         {
-            descriptionText = "The Renaissance";
+            descriptionText = "Our time Era";
             textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
         }
         else if (era.eraName.Contains("Future"))
         {
-            descriptionText = "The Renaissance";
+            descriptionText = "Future Era";
             textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
         }
 
@@ -312,12 +317,21 @@ public IEnumerator ShowMessage(string message, string textForButton = "OK", floa
 
     public void OnStartButtonClicked()
     {
+        Debug.Log("Start button pressed");
         // Запускаем анимацию для плавного увеличения альфы с использованием CanvasGroup
         transitionCanvasGroup.DOFade(1, 1f).OnComplete(() =>
         {
             // После завершения анимации загрузим следующую сцену
             LoadNextScene();
         });
+    }
+
+    public void ChangeSimulationBackground(Sprite sprite)
+    {
+        GameObject simulationCanvas = GameObject.Find("SimulationCanvas");
+
+        Image backgroundImage = simulationCanvas.transform.Find("Background").GetComponent<Image>();
+        backgroundImage.sprite = sprite;
     }
 
     private void LoadNextScene()

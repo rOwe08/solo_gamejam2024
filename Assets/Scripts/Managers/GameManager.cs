@@ -34,6 +34,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ApplyResult(string result)
+    {
+        GameObject simulationManager = GameObject.Find("SimulationManager");
+
+        simulationManager.GetComponent<SimulationManager>().ApplyResult(result); 
+    }
+
     void Update()
     {
 

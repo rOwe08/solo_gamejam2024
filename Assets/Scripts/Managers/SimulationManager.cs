@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -31,39 +32,6 @@ public class SimulationManager : MonoBehaviour
     public List<Era> eras = new List<Era>();
     public int currentEraIndex = 0;
 
-
-    private static SimulationManager _instance;
-    public static SimulationManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<SimulationManager>();
-                if (_instance == null)
-                {
-                    GameObject obj = new GameObject("SimulationManager");
-                    _instance = obj.AddComponent<SimulationManager>();
-                }
-            }
-
-            return _instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     void Start()
     {
         man = HumanManager.Instance.chosenMan;
@@ -79,9 +47,15 @@ public class SimulationManager : MonoBehaviour
     // Start the quest cycle
     public IEnumerator StartEra(Era era)
     {
+        UIManager.Instance.ChangeSimulationBackground(era.successSprite);
+
         // Display the initial message
         yield return StartCoroutine(UIManager.Instance.ShowStartEraMessage(era));
 
+        if (era.eraName.Contains("Future"))
+        {
+            StartCoroutine(WinGame());
+        }
         // Get available quests for the era
         availableQuests = QuestManager.Instance.GetQuestsForEra(era); // Replace with the current era dynamically
 
@@ -104,8 +78,19 @@ public class SimulationManager : MonoBehaviour
         // Show third quest
         yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[2]));
 
-        // After all quests, check the conditions for the era
-        CheckPrimitiveSocietyEvents(); // Replace with your era-specific condition check
+        bool ToNextEra = CheckForNextEraConditions();
+
+        if (ToNextEra)
+        {
+            currentEraIndex++;
+            currentEra = eras[currentEraIndex];
+
+            StartCoroutine(StartEra(currentEra));
+        }
+        else
+        {
+            StartCoroutine(LoseGame());
+        }
     }
 
     // Get random quests
@@ -144,18 +129,26 @@ public class SimulationManager : MonoBehaviour
 
     }
 
-    // Check the events for the "Primitive Society" era
-    void CheckPrimitiveSocietyEvents()
+    IEnumerator WinGame()
     {
-        if (averageStrength > 4 || averageLogic > 5)
-        {
-            Debug.Log("Invention of tools has occurred");
-        }
-        else
-        {
-            Debug.Log("Invention of tools did not occur");
-        }
+        yield return new WaitForSeconds(1f);
+        Debug.Log("YOU WIN!");
+    }
 
-        // Add other conditions based on the stats as needed
+    IEnumerator LoseGame()
+    {
+        UIManager.Instance.ChangeSimulationBackground(currentEra.failureSprite);
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(UIManager.Instance.ShowMessage("You lose:(", "Back:("));
+
+        Debug.Log("YOU LOSE!");
+    }
+
+    // Check the events for the "Primitive Society" era
+    bool CheckForNextEraConditions()
+    {
+        return false;
     }
 }

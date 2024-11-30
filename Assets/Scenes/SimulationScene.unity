@@ -1284,7 +1284,7 @@ MonoBehaviour:
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 3baed9051733f994ab01fb6172f6b5a5, type: 3}
     failureSprite: {fileID: 21300000, guid: ee955fa5483f65d46b8e42dad9fffd28, type: 3}
-  - eraName: RenaissenceEra
+  - eraName: RenaissanceEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 01b15e39ff5b60848a4acbdd9233bfde, type: 3}
@@ -1304,6 +1304,7 @@ MonoBehaviour:
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 8712922f601787d4e96003259bcd3c93, type: 3}
     failureSprite: {fileID: 0}
+  currentEraIndex: 0
 --- !u!4 &849449960
 Transform:
   m_ObjectHideFlags: 0
@@ -1376,7 +1377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f2e9a80dca970014c9d52d9107cc2f5c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

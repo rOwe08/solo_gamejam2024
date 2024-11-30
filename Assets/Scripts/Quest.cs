@@ -19,7 +19,7 @@ public class QuestAnswer
         // If onChosen is null, assign the default action
         if (onChosen == null)
         {
-            OnChosen = () => SimulationManager.Instance.ApplyResult(result);
+            OnChosen = () => GameManager.Instance.ApplyResult(result);
         }
         else
         {

@@ -184,13 +184,6 @@ public class CreatePanel : MonoBehaviour
 
     void CreateHuman()
     {
-        Debug.Log("Character created!");
-        Debug.Log("Name: " + currentHuman.humanName);
-        foreach (var stat in currentHuman.Stats)
-        {
-            Debug.Log(stat.Name + ": " + stat.Value);
-        }
-
         HumanManager.Instance.AddHuman(currentHuman);
         HumanManager.Instance.AssignHuman(currentHuman);
     }

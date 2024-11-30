@@ -1782,6 +1782,7 @@ GameObject:
   - component: {fileID: 338726192}
   - component: {fileID: 338726191}
   - component: {fileID: 338726194}
+  - component: {fileID: 338726195}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1906,6 +1907,18 @@ MonoBehaviour:
   pulseScale: 1.1
   pulseDuration: 0.8
   isActive: 0
+--- !u!114 &338726195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338726189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca472c5c8aed24a97ecfad741fca0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378093801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,13 +2619,14 @@ GameObject:
   - component: {fileID: 553679869}
   - component: {fileID: 553679870}
   - component: {fileID: 553679871}
+  - component: {fileID: 553679872}
   m_Layer: 5
   m_Name: TransitionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &553679867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2648,7 +2662,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553679866}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2682,6 +2696,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &553679872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553679866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c985f3c937e814e86b6f9b56b95ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &586111389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3363,6 +3389,7 @@ MonoBehaviour:
   startButton: {fileID: 338726191}
   answerButtonPrefab: {fileID: 3134723581602239909, guid: 68419cdb6ab32d847bcd9f4f0d23d7bf, type: 3}
   transitionImage: {fileID: 553679871}
+  transitionCanvasGroup: {fileID: 0}
 --- !u!4 &919873004
 Transform:
   m_ObjectHideFlags: 0

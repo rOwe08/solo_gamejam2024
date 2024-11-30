@@ -32,6 +32,15 @@ public class HumanPanel : MonoBehaviour
         // Get the Image component of the background panel
         panelBackground = GetComponent<Image>();
 
+        if (gameObject.name.Contains("Woman"))
+        {
+            UIManager.Instance.womanPanel = this;
+        }
+        else
+        {
+            UIManager.Instance.manPanel = this;
+        }
+
         // Initialize panel colors at the start
         UpdatePanel();
     }

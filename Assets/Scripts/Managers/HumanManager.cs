@@ -49,6 +49,9 @@ public class HumanManager : MonoBehaviour
 
     public void AssignHuman(Human human)
     {
+        manPanel = UIManager.Instance.manPanel;
+        womanPanel = UIManager.Instance.womanPanel;
+
         // Determine if the human is a man or a woman and assign to the correct panel
         if (human is Man)
         {
