@@ -10,6 +10,9 @@ public class HumanManager : MonoBehaviour
     public HumanPanel manPanel;
     public HumanPanel womanPanel;
 
+    public Human chosenMan;
+    public Human chosenWoman;
+
     private static HumanManager _instance;
     public static HumanManager Instance
     {
@@ -54,6 +57,8 @@ public class HumanManager : MonoBehaviour
                 manPanel.UnassignHuman();
             }
 
+            chosenMan = human;
+
             // Assign the new human to the man panel
             manPanel.AssignHuman(human);
         }
@@ -63,6 +68,8 @@ public class HumanManager : MonoBehaviour
             {
                 womanPanel.UnassignHuman();
             }
+
+            chosenWoman = human;
 
             // Assign the new human to the woman panel
             womanPanel.AssignHuman(human);
