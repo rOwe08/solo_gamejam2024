@@ -4,20 +4,22 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    private UIManager _instance;
+    private static UIManager _instance;
     public HumanPanel womanPanel;
     public HumanPanel manPanel;
     public Button startButton;
     private PulsingObject pulsingStartButton;
 
+
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
     private CanvasGroup transitionCanvasGroup;
 
-    public UIManager Instance
+    public static UIManager Instance
     {
         get
         {
@@ -92,6 +94,79 @@ public class UIManager : MonoBehaviour
                 pulsingStartButton.isActive = false;  // Останавливаем пульсацию
             }
         }
+    }
+
+    public void UpdateStatsPanel(List<Stat> humanityStats)
+    {
+        GameObject simulationCanvas = GameObject.Find("SimulationCanvas");
+        GameObject statsPanel = simulationCanvas.transform.Find("StatsPanel").gameObject;
+
+        for (int i = 0; i < humanityStats.Count; i++)
+        {
+            foreach (Transform child in statsPanel.transform)
+            {
+                TextMeshProUGUI textComponent = child.GetComponent<TextMeshProUGUI>();
+
+                if (textComponent != null && child.name.Contains(humanityStats[i].Name))
+                {
+                    // Округляем число вниз и отображаем его без плавающей точки
+                    int roundedValue = Mathf.FloorToInt(humanityStats[i].Value);
+                    textComponent.text = $"{humanityStats[i].Abbreviation}: {roundedValue}";
+                    break;
+                }
+            }
+        }
+    }
+
+
+    // Функция для отображения текста на табло
+    public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
+    {
+        GameObject messageCanvas = GameObject.Find("MessageCanvas");
+
+        GameObject messagePanel = null;
+        GameObject confirmButton = null;
+
+        TextMeshProUGUI messageText = null;
+
+        if (messageCanvas != null)
+        {
+            // Получаем ссылку на панель и текстовое поле внутри SimulationCanvas
+            messagePanel = messageCanvas.transform.Find("MessagePanel").gameObject;
+            messageText = messagePanel.GetComponentInChildren<TextMeshProUGUI>();
+
+            confirmButton = messagePanel.transform.Find("ConfirmButton").gameObject;
+        }
+        else
+        {
+            Debug.LogError("SimulationCanvas не найден в сцене.");
+        }
+
+        yield return new WaitForSeconds(delay); // Ждём указанное время
+        messagePanel.SetActive(true); // Показываем панель
+        messageText.text = message; // Устанавливаем текст
+
+        confirmButton.transform.Find("ConfirmText").GetComponent<TextMeshProUGUI>().text = textForButton;
+    }
+
+    // Функция для скрытия табло через определённое время
+    public void HideMessage(float delay)
+    {
+        GameObject messageCanvas = GameObject.Find("MessageCanvas");
+
+        GameObject messagePanel = null;
+
+        if (messageCanvas != null)
+        {
+            // Получаем ссылку на панель и текстовое поле внутри SimulationCanvas
+            messagePanel = messageCanvas.transform.Find("MessagePanel").gameObject;
+        }
+        else
+        {
+            Debug.LogError("SimulationCanvas не найден в сцене.");
+        }
+
+        messagePanel.SetActive(false); // Скрываем панель
     }
 
     public void OnStartButtonClicked()

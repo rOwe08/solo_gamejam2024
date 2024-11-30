@@ -30,7 +30,10 @@ public class SimulationManager : MonoBehaviour
         woman = HumanManager.Instance.chosenWoman;
 
         CalculateAverageStats();
-        UpdateStatsPanel();
+        UIManager.Instance.UpdateStatsPanel(humanityStats);
+
+        StartCoroutine(UIManager.Instance.ShowMessage("First people created new village", "Here we go again...", 3f));
+
         //CheckPrimitiveSocietyEvents();
         //CheckAncientWorldEvents();
         //CheckAntiquityEvents();
@@ -40,25 +43,7 @@ public class SimulationManager : MonoBehaviour
         //CheckModernEraEvents();
 
         // Пример побочного события
-        TriggerRandomEvent();
-    }
-
-    void UpdateStatsPanel()
-    {
-        for (int i = 0; i < humanityStats.Count; i++)
-        {
-            foreach (Transform child in statsPanel.transform)
-            {
-                TextMeshProUGUI textComponent = child.GetComponent<TextMeshProUGUI>();
-
-                if (textComponent != null && child.name.Contains(humanityStats[i].Name))
-                {
-                    // Используем аббревиатуру вместо полного названия
-                    textComponent.text = $"{humanityStats[i].Abbreviation}: {humanityStats[i].Value:F2}";
-                    break;
-                }
-            }
-        }
+        //TriggerRandomEvent();
     }
 
     void CalculateAverageStats()
