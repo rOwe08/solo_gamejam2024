@@ -88,22 +88,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateStatsPanel(List<Stat> humanityStats)
+    public void UpdateStatsPanel(List<Stat> stats, string panelName)
     {
         GameObject simulationCanvas = GameObject.Find("SimulationCanvas");
-        GameObject statsPanel = simulationCanvas.transform.Find("StatsPanel").gameObject;
+        GameObject statsPanel = simulationCanvas.transform.Find(panelName).gameObject;
 
-        for (int i = 0; i < humanityStats.Count; i++)
+        for (int i = 0; i < stats.Count; i++)
         {
             foreach (Transform child in statsPanel.transform)
             {
                 TextMeshProUGUI textComponent = child.GetComponent<TextMeshProUGUI>();
 
-                if (textComponent != null && child.name.Contains(humanityStats[i].Name))
+                if (textComponent != null && child.name.Contains(stats[i].Name))
                 {
                     // Округляем число вниз и отображаем его без плавающей точки
-                    int roundedValue = Mathf.FloorToInt(humanityStats[i].Value);
-                    textComponent.text = $"{humanityStats[i].Abbreviation}: {roundedValue}";
+                    int roundedValue = Mathf.FloorToInt(stats[i].Value);
+                    textComponent.text = $"{stats[i].Abbreviation}: {roundedValue}";
                     break;
                 }
             }

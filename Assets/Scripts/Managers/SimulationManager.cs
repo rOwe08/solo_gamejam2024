@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,6 +28,8 @@ public class SimulationManager : MonoBehaviour
     private float averageMotivation;
 
     List<Stat> humanityStats = new List<Stat>();
+    List<Stat> abstractStats = new List<Stat>();
+
     private List<Quest> availableQuests = new List<Quest>();
 
     public List<Era> eras = new List<Era>();
@@ -37,8 +40,17 @@ public class SimulationManager : MonoBehaviour
         man = HumanManager.Instance.chosenMan;
         woman = HumanManager.Instance.chosenWoman;
         CalculateAverageStats();
-        UIManager.Instance.UpdateStatsPanel(humanityStats);
+        UIManager.Instance.UpdateStatsPanel(humanityStats, "StatsPanel");
         currentEra = eras[currentEraIndex];
+
+        abstractStats = new List<Stat>
+        {
+            new Stat("Culture", "CUL", 0),      // Правильная аббревиатура для Культуры
+            new Stat("Science", "SCI", 0),      // Правильная аббревиатура для Науки
+            new Stat("Religion", "REL", 0),     // Правильная аббревиатура для Религии
+        };
+
+        UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractStatsPanel");
 
         // Start quest cycle
         StartCoroutine(StartEra(currentEra));
