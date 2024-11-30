@@ -391,6 +391,11 @@ public class UIManager : MonoBehaviour
         transitionCanvasGroup.DOFade(0, 1f);
     }
 
+    public int GetAvailablePoints()
+    {
+        return createPanel.availablePoints;
+    }
+
     public void UpdateAvailablePoints()
     {
         if (createPanel != null)

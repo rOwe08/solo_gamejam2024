@@ -30,6 +30,8 @@ public class CreatePanel : MonoBehaviour
 
     private Stage currentStage;
 
+    public int availablePoints = 0;
+
     // Ссылка на InputField для имени персонажа
     public TMP_InputField nameInputField;
 
@@ -155,14 +157,6 @@ public class CreatePanel : MonoBehaviour
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Agility").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Agility";
 
-                int tempPhysValues = 0;
-
-                foreach (Slider slider in sliders)
-                {
-                    tempPhysValues += (int)slider.value;
-                }
-
-                pointsText.text = $"Available points: {GameManager.Instance.physicsPoints - tempPhysValues}/{GameManager.Instance.physicsPoints}";
                 break;
 
             case Stage.Intellectual:
@@ -175,13 +169,6 @@ public class CreatePanel : MonoBehaviour
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Learnability").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Learnability";
 
-                int tempIntValues = 0;
-                foreach (Slider slider in sliders)
-                {
-                    tempIntValues += (int)slider.value;
-                }
-
-                pointsText.text = $"Available points: {GameManager.Instance.intellectPoints - tempIntValues}/{GameManager.Instance.intellectPoints}";
                 break;
 
             case Stage.Mental:
@@ -193,13 +180,6 @@ public class CreatePanel : MonoBehaviour
                 sliders[2].value = currentHuman.Stats.First(stat => stat.Name == "Motivation").Value;
                 sliders[2].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Motivation";
 
-                int tempMenValues = 0;
-                foreach (Slider slider in sliders)
-                {
-                    tempMenValues += (int)slider.value;
-                }
-
-                pointsText.text = $"Available points: {GameManager.Instance.mentalPoints - tempMenValues}/{GameManager.Instance.mentalPoints}";
                 break;
         }
     }
@@ -231,14 +211,17 @@ public class CreatePanel : MonoBehaviour
         {
             case Stage.Physical:
                 pointsText.text = $"Available points: {GameManager.Instance.physicsPoints - tempValue}/{GameManager.Instance.physicsPoints}";
+                availablePoints = GameManager.Instance.physicsPoints - tempValue;
                 break;
 
             case Stage.Intellectual:
                 pointsText.text = $"Available points: {GameManager.Instance.intellectPoints - tempValue}/{GameManager.Instance.intellectPoints}";
+                availablePoints = GameManager.Instance.intellectPoints - tempValue;
                 break;
 
             case Stage.Mental:
                 pointsText.text = $"Available points: {GameManager.Instance.mentalPoints - tempValue}/{GameManager.Instance.mentalPoints}";
+                availablePoints = GameManager.Instance.mentalPoints - tempValue;
                 break;
         }
     }

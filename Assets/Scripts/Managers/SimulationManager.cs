@@ -99,6 +99,7 @@ public class SimulationManager : MonoBehaviour
                     if (currentStat == null || currentStat.Value < requirement.Value)
                     {
                         allRequirementsMet = false;
+                        numHappenedEvents--;
                         break;
                     }
                 }
