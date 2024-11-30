@@ -1,18 +1,18 @@
-public class Human
+﻿public class Human
 {
     public string humanName;
 
-    public float strength;      
-    public float endurance;     
-    public float agility;       
+    public float strength;
+    public float endurance;
+    public float agility;
 
-    public float logic;         
-    public float creativity;   
-    public float learnability;  
+    public float logic;
+    public float creativity;
+    public float learnability;
 
-    public float emotionalStability; 
-    public float socialSkills;        
-    public float motivation;         
+    public float emotionalStability;
+    public float socialSkills;
+    public float motivation;
 
     public Human()
     {
@@ -35,7 +35,20 @@ public class Human
         this.socialSkills = socialSkills;
         this.motivation = motivation;
     }
+
+    // Метод для получения общего рейтинга (среднего значения всех характеристик)
+    public float GetOverallRating()
+    {
+        float total = strength + endurance + agility
+                    + logic + creativity + learnability
+                    + emotionalStability + socialSkills + motivation;
+
+        int numOfAttributes = 9;  // Всего 9 характеристик
+
+        return total / numOfAttributes;
+    }
 }
+
 
 public class Woman : Human
 {
