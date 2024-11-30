@@ -17,16 +17,6 @@ public class SimulationManager : MonoBehaviour
 
     public Era currentEra;
 
-    private float averageStrength;
-    private float averageEndurance;
-    private float averageAgility;
-    private float averageLogic;
-    private float averageCreativity;
-    private float averageLearnability;
-    private float averageEmotionalStability;
-    private float averageSocialSkills;
-    private float averageMotivation;
-
     List<Stat> humanityStats = new List<Stat>();
     List<Stat> abstractStats = new List<Stat>();
 
@@ -49,6 +39,8 @@ public class SimulationManager : MonoBehaviour
             new Stat("Science", "SCI", 0),      // Правильная аббревиатура для Науки
             new Stat("Religion", "REL", 0),     // Правильная аббревиатура для Религии
         };
+
+        AssignEventsToEras();
 
         UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractStatsPanel");
 
@@ -178,7 +170,79 @@ public class SimulationManager : MonoBehaviour
         
     }
 
+    public void AssignEventsToEras()
+    {
+        // Primitive Society to Ancient World
+        eras[0].events = new List<EraEvent>
+        {
+            new EraEvent("Discovery of Fire", new List<Stat> { new Stat("Logic", "LOG", 2) }),
+            new EraEvent("Invention of Stone Tools", new List<Stat> { new Stat("Strength", "STR", 3) }),
+            new EraEvent("Development of Language", new List<Stat> {
+                new Stat("Creativity", "SOC", 1),
+                new Stat("Learnability", "LRN", 2)}),
+            new EraEvent("Formation of Tribal Societies", new List<Stat> { new Stat("Social Skills", "SOC", 2) }),
+            new EraEvent("Domestication of Animals", new List<Stat> { new Stat("Endurance", "END", 2) })
+        };
+        // Ancient World to Antiquity
+        eras[1].events = new List<EraEvent>
+        {
+            new EraEvent("Invention of the Wheel", new List<Stat> { new Stat("Strength", "STR", 3) }),
+            new EraEvent("Foundation of Early Cities", new List<Stat> { new Stat("Social Skills", "SOC", 3) }),
+            new EraEvent("Agricultural Revolution", new List<Stat> { new Stat("Endurance", "END", 2) }),
+            new EraEvent("Development of Written Language", new List<Stat> { new Stat("Creativity", "CRE", 2) }),
+            new EraEvent("Introduction of Trade", new List<Stat> { new Stat("Social Skills", "SOC", 3) })
+        };
 
+        // Antiquity to Middle Ages
+        eras[2].events = new List<EraEvent>
+        {
+            new EraEvent("The Rise of Empires", new List<Stat> { new Stat("Strength", "STR", 3), new Stat("Social Skills", "SOC", 3) }),
+            new EraEvent("Invention of the Printing Press", new List<Stat> { new Stat("Creativity", "CRE", 3) }),
+            new EraEvent("Expansion of Trade Routes", new List<Stat> { new Stat("Social Skills", "SOC", 2) }),
+            new EraEvent("The Spread of Religion", new List<Stat> { new Stat("Religion", "REL", 3) }),
+            new EraEvent("Medieval Warfare", new List<Stat> { new Stat("Strength", "STR", 4) })
+        };
+
+        // Middle Ages to Renaissance
+        eras[3].events = new List<EraEvent>
+        {
+            new EraEvent("The Renaissance", new List<Stat> { new Stat("Creativity", "CRE", 4), new Stat("Science", "SCI", 3) }),
+            new EraEvent("The Printing Revolution", new List<Stat> { new Stat("Creativity", "CRE", 3) }),
+            new EraEvent("Scientific Discoveries", new List<Stat> { new Stat("Science", "SCI", 4) }),
+            new EraEvent("Reformation", new List<Stat> { new Stat("Religion", "REL", 2) }),
+            new EraEvent("Rise of Humanism", new List<Stat> { new Stat("Creativity", "CRE", 3) })
+        };
+
+        // Renaissance to Modern Era
+        eras[4].events = new List<EraEvent>
+        {
+            new EraEvent("Industrial Revolution", new List<Stat> { new Stat("Strength", "STR", 4), new Stat("Science", "SCI", 3) }),
+            new EraEvent("Invention of the Steam Engine", new List<Stat> { new Stat("Science", "SCI", 4) }),
+            new EraEvent("Development of Capitalism", new List<Stat> { new Stat("Motivation", "MOT", 2) }),
+            new EraEvent("Rise of Global Empires", new List<Stat> { new Stat("Strength", "STR", 3) }),
+            new EraEvent("The Enlightenment", new List<Stat> { new Stat("Logic", "LOG", 3) })
+        };
+
+        // Modern Era to Our Time
+        eras[5].events = new List<EraEvent>
+        {
+            new EraEvent("World Wars", new List<Stat> { new Stat("Strength", "STR", 4), new Stat("Social Skills", "SOC", 3) }),
+            new EraEvent("Space Exploration", new List<Stat> { new Stat("Science", "SCI", 5) }),
+            new EraEvent("Technological Advancements", new List<Stat> { new Stat("Science", "SCI", 4) }),
+            new EraEvent("Digital Revolution", new List<Stat> { new Stat("Logic", "LOG", 4) }),
+            new EraEvent("Rise of Globalization", new List<Stat> { new Stat("Social Skills", "SOC", 4) })
+        };
+
+        // Our Time to Future
+        eras[6].events = new List<EraEvent>
+        {
+            new EraEvent("Climate Change Awareness", new List<Stat> { new Stat("Social Skills", "SOC", 3), new Stat("Science", "SCI", 3) }),
+            new EraEvent("Artificial Intelligence", new List<Stat> { new Stat("Logic", "LOG", 5) }),
+            new EraEvent("Space Colonization", new List<Stat> { new Stat("Science", "SCI", 4) }),
+            new EraEvent("Universal Basic Income", new List<Stat> { new Stat("Social Skills", "SOC", 3) }),
+            new EraEvent("Technological Unemployment", new List<Stat> { new Stat("Social Skills", "SOC", 2), new Stat("Logic", "LOG", 2) })
+        };
+    }
     IEnumerator WinGame()
     {
         yield return new WaitForSeconds(1f);

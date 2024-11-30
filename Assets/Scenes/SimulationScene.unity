@@ -1633,47 +1633,66 @@ MonoBehaviour:
     survivalThreshold: 0
     successSprite: {fileID: 0}
     failureSprite: {fileID: 0}
+    EventNames: []
   eras:
   - eraName: PrimitiveSocietyEra
-    events: []
+    events:
+    - eventName: Discovery of Fire
+      happened: 0
+    - eventName: 
+      happened: 0
+    - eventName: 
+      happened: 0
+    - eventName: 
+      happened: 0
+    - eventName: 
+      happened: 0
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: f2e9a80dca970014c9d52d9107cc2f5c, type: 3}
     failureSprite: {fileID: 21300000, guid: 439d4799630edab48ac165ba440c1838, type: 3}
+    EventNames: []
   - eraName: AncientWorldEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: e79291eb80c9f9143bf9b0631540ffd0, type: 3}
     failureSprite: {fileID: 21300000, guid: e0e13a461e2a41b498c0b5827bb5465d, type: 3}
+    EventNames: []
   - eraName: AntiquityEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: f14031a36758e1b469bb54a1f37c1724, type: 3}
     failureSprite: {fileID: 21300000, guid: 4cd9dbbcd2751934f8d18792e4b0cc90, type: 3}
+    EventNames: []
   - eraName: MiddleAgesEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 3baed9051733f994ab01fb6172f6b5a5, type: 3}
     failureSprite: {fileID: 21300000, guid: ee955fa5483f65d46b8e42dad9fffd28, type: 3}
+    EventNames: []
   - eraName: RenaissanceEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 01b15e39ff5b60848a4acbdd9233bfde, type: 3}
     failureSprite: {fileID: 21300000, guid: feacf4f161423ad408fef8316db8abf6, type: 3}
+    EventNames: []
   - eraName: ModernEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: d32cb0c1d025a6140a453c9bbb1d9f63, type: 3}
     failureSprite: {fileID: 21300000, guid: 3cfec24f7190bbf4da4f3558f7a984ba, type: 3}
+    EventNames: []
   - eraName: OurEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 14cfdbcbfa71f0b429d71a7af30ad07f, type: 3}
     failureSprite: {fileID: 21300000, guid: e4c938aca94a1d84c9e40b286b742acf, type: 3}
+    EventNames: []
   - eraName: FutureEra
     events: []
     survivalThreshold: 0
     successSprite: {fileID: 21300000, guid: 8712922f601787d4e96003259bcd3c93, type: 3}
     failureSprite: {fileID: 0}
+    EventNames: []
   currentEraIndex: 0
 --- !u!4 &849449960
 Transform:
