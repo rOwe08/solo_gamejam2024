@@ -157,7 +157,6 @@ public class QuestManager : MonoBehaviour
                 "A plague has spread across the land. How should we respond?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Close off the cities, risking economic collapse", "ECO -1"), // Потеря экономики
             new QuestAnswer("Focus on prayers and rituals, neglecting other needs", "REL -1"), // Потеря веры
             new QuestAnswer("Quarantine the sick, risking social unrest", "SOC -1") // Социальные последствия
                 } // В этом квесте все ответы имеют негативные последствия
@@ -178,7 +177,6 @@ public class QuestManager : MonoBehaviour
                 "A code of laws is being proposed. What should it focus on?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on property rights", "ECO +1"), // Экономика через защиту прав
             new QuestAnswer("Focus on religious morality", "REL +1"), // Религиозная мораль
             new QuestAnswer("Focus on equality for all", "SOC +1") // Социальные навыки для равенства
                 }

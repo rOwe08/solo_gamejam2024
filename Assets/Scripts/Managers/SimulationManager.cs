@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Playables;
 using UnityEngine;
@@ -144,33 +145,36 @@ public class SimulationManager : MonoBehaviour
     // Cycle through quests
     public IEnumerator StartQuestCycle()
     {
-        // Select 3 random quests
-        List<Quest> selectedQuests = GetRandomQuests(3);
-
-        // Show first quest
-        yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[0]));
-        UpdateEventsPanel(currentEra);
-
-        // Show second quest
-        yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[1]));
-        UpdateEventsPanel(currentEra);
-
-        // Show third quest
-        yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[2]));
-        UpdateEventsPanel(currentEra);
-
-        bool ToNextEra = CheckForNextEraConditions();
-
-        if (ToNextEra)
+        if (!currentEra.eraName.Contains("Future"))
         {
-            currentEraIndex++;
-            currentEra = eras[currentEraIndex];
+            // Select 3 random quests
+            List<Quest> selectedQuests = GetRandomQuests(3);
 
-            StartCoroutine(StartEra(currentEra));
-        }
-        else
-        {
-            StartCoroutine(LoseGame());
+            // Show first quest
+            yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[0]));
+            UpdateEventsPanel(currentEra);
+
+            // Show second quest
+            yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[1]));
+            UpdateEventsPanel(currentEra);
+
+            // Show third quest
+            yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[2]));
+            UpdateEventsPanel(currentEra);
+
+            bool ToNextEra = CheckForNextEraConditions();
+
+            if (ToNextEra)
+            {
+                currentEraIndex++;
+                currentEra = eras[currentEraIndex];
+
+                StartCoroutine(StartEra(currentEra));
+            }
+            else
+            {
+                StartCoroutine(LoseGame());
+            }
         }
     }
 
