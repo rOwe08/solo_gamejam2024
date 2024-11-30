@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public Button startButton;
     private PulsingObject pulsingStartButton;
 
+    public GameObject answerButtonPrefab;
 
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
@@ -118,9 +119,62 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Function to display the quest and wait for user interaction
+    public IEnumerator DisplayQuest(Quest quest)
+    {
+        GameObject questCanvas = GameObject.Find("QuestCanvas");
+        GameObject questPanel = questCanvas.transform.Find("QuestPanel").gameObject;
+        GameObject buttonsLayout = questPanel.transform.Find("ButtonsLayout").gameObject;
 
-    // Функция для отображения текста на табло
-    public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
+        // Display the quest's title and description
+        questPanel.SetActive(true); // Show the quest panel
+        questPanel.transform.Find("QuestText").GetComponent<TextMeshProUGUI>().text = quest.Description;
+
+        // Clear previous answer buttons (if any)
+        ClearAnswerButtons(buttonsLayout);
+
+        // Instantiate a button for each answer
+        for (int i = 0; i < quest.Answers.Count; i++)
+        {
+            // Instantiate the button from the prefab
+            GameObject answerButton = Instantiate(answerButtonPrefab, buttonsLayout.transform);
+            TextMeshProUGUI buttonText = answerButton.GetComponentInChildren<TextMeshProUGUI>(); // Find the text component inside the button prefab
+
+            // Set the button text to the answer's text
+            buttonText.text = quest.Answers[i].Text;
+
+            // Add the OnClick listener to trigger the selected answer's action
+            Button button = answerButton.GetComponent<Button>();
+            button.onClick.AddListener(() =>
+            {
+                // Invoke the selected answer's action
+                quest.Answers[i].OnChosen?.Invoke();
+
+                // Hide the quest canvas after the answer is selected
+                questCanvas.SetActive(false);
+            });
+        }
+
+        // Wait for the user to select an answer (button click)
+        yield return new WaitUntil(() => !questCanvas.activeSelf); // Wait until the quest canvas is hidden
+
+        // After the quest is answered, you can proceed with other actions
+        yield return new WaitForSeconds(1f);  // Optionally wait before moving on
+    }
+
+    // Function to clear the answer buttons
+    private void ClearAnswerButtons(GameObject gO)
+    {
+        // Clear previous answer buttons (remove all children in the container)
+        foreach (Transform child in gO.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+
+// Function to display the message and wait for button click
+public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
     {
         GameObject messageCanvas = GameObject.Find("MessageCanvas");
 
@@ -131,7 +185,7 @@ public class UIManager : MonoBehaviour
 
         if (messageCanvas != null)
         {
-            // Получаем ссылку на панель и текстовое поле внутри SimulationCanvas
+            // Get references to the message panel and confirm button
             messagePanel = messageCanvas.transform.Find("MessagePanel").gameObject;
             messageText = messagePanel.GetComponentInChildren<TextMeshProUGUI>();
 
@@ -139,18 +193,87 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("SimulationCanvas не найден в сцене.");
+            Debug.LogError("MessageCanvas not found in the scene.");
+            yield break;
         }
 
-        yield return new WaitForSeconds(delay); // Ждём указанное время
-        messagePanel.SetActive(true); // Показываем панель
-        messageText.text = message; // Устанавливаем текст
+        // Wait for the initial delay
+        yield return new WaitForSeconds(delay);
 
+        // Show the message panel
+        messagePanel.SetActive(true);
+        messageText.text = message; // Set the message text
+
+        // Set the text for the button
         confirmButton.transform.Find("ConfirmText").GetComponent<TextMeshProUGUI>().text = textForButton;
+
+        // Wait for the user to click the confirm button
+        bool buttonClicked = false;
+
+        // Add a listener for the confirm button
+        confirmButton.GetComponent<Button>().onClick.AddListener(() => {
+            buttonClicked = true;
+        });
+
+        // Wait until the button is clicked
+        while (!buttonClicked)
+        {
+            yield return null; // Wait one frame and check again
+        }
+
+        // After button click, hide the message panel
+        HideMessage();
+    }
+
+    // Метод для отображения сообщения, теперь принимает объект Era
+    public IEnumerator ShowStartEraMessage(Era era)
+    {
+        string descriptionText = "";
+        string textForConfirmButton = "";
+
+        // Определяем текст для каждой эпохи
+        if (era.eraName.Contains("Primitive"))
+        {
+            descriptionText = "First people created new village";
+            textForConfirmButton = "Oh... Here we ho again...";
+        }
+        else if (era.eraName.Contains("Ancient"))
+        {
+            descriptionText = "The Rise of Ancient Civilization";
+            textForConfirmButton = "Great empires are forming. Will they focus on war or peace?";
+        }
+        else if (era.eraName.Contains("Middle"))
+        {
+            descriptionText = "The Middle Ages";
+            textForConfirmButton = "Knights, castles, and kingdoms are emerging. What path will humanity choose?";
+        }
+        else if (era.eraName.Contains("Renaissance"))
+        {
+            descriptionText = "The Renaissance";
+            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+        }
+        else if (era.eraName.Contains("Modern"))
+        {
+            descriptionText = "The Renaissance";
+            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+        }
+        else if (era.eraName.Contains("Our"))
+        {
+            descriptionText = "The Renaissance";
+            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+        }
+        else if (era.eraName.Contains("Future"))
+        {
+            descriptionText = "The Renaissance";
+            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+        }
+
+        // Вызываем ShowMessage для отображения текста
+        yield return StartCoroutine(ShowMessage(descriptionText, textForConfirmButton, 3f));
     }
 
     // Функция для скрытия табло через определённое время
-    public void HideMessage(float delay)
+    public void HideMessage()
     {
         GameObject messageCanvas = GameObject.Find("MessageCanvas");
 
@@ -163,7 +286,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("SimulationCanvas не найден в сцене.");
+            Debug.LogError("MessageCanvas не найден в сцене.");
         }
 
         messagePanel.SetActive(false); // Скрываем панель

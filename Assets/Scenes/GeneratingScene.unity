@@ -3361,6 +3361,7 @@ MonoBehaviour:
   womanPanel: {fileID: 279118491}
   manPanel: {fileID: 98794248}
   startButton: {fileID: 338726191}
+  answerButtonPrefab: {fileID: 3134723581602239909, guid: 68419cdb6ab32d847bcd9f4f0d23d7bf, type: 3}
   transitionImage: {fileID: 553679871}
 --- !u!4 &919873004
 Transform:
