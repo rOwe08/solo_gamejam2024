@@ -235,8 +235,8 @@ public class UIManager : MonoBehaviour
     }
 
 
-// Function to display the message and wait for button click
-    public IEnumerator ShowMessage(string message, string textForButton = "OK", float delay = 0)
+    // Function to display the message and wait for button click
+    public IEnumerator ShowMessage(string message, string textForButton = "OK", string award = null, float delay = 0)
     {
         GameObject messageCanvas = GameObject.Find("MessageCanvas");
 
@@ -252,6 +252,12 @@ public class UIManager : MonoBehaviour
             messageText = messagePanel.GetComponentInChildren<TextMeshProUGUI>();
 
             confirmButton = messagePanel.transform.Find("ConfirmButton").gameObject;
+
+            if (award != null) 
+            {
+                messagePanel.transform.Find("RewardText").gameObject.SetActive(true);
+                messagePanel.transform.Find("RewardText").GetComponent<TextMeshProUGUI>().text =  $"Reward: {award}";
+            }
         }
         else
         {
@@ -346,7 +352,7 @@ public class UIManager : MonoBehaviour
         }
 
         // Вызываем ShowMessage для отображения текста
-        yield return StartCoroutine(ShowMessage(descriptionText, textForConfirmButton, 3f));
+        yield return StartCoroutine(ShowMessage(descriptionText, textForConfirmButton, null, 3f));
     }
 
     // Функция для скрытия табло через определённое время

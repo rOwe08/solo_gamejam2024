@@ -329,7 +329,28 @@ public class SimulationManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(UIManager.Instance.ShowMessage("You Win!", "Back:)"));
+        Stat statReward = DetermineReward(true); // true — это победа
+        string rewardType = "";
+
+        if (statReward.Abbreviation == "STR" || statReward.Abbreviation == "END" || statReward.Abbreviation == "AGI")
+        {
+            rewardType = "Physical Parameters";
+            GameManager.Instance.physicsPoints++;
+        }
+        else if(statReward.Abbreviation == "LOG" || statReward.Abbreviation == "CRE" || statReward.Abbreviation == "LRN")
+        {
+            rewardType = "Intellectual Parameters";
+            GameManager.Instance.intellectPoints++;
+        }
+        else if (statReward.Abbreviation == "EMO" || statReward.Abbreviation == "SOC" || statReward.Abbreviation == "MOT")
+        {
+            rewardType = "Mental Parameters";
+            GameManager.Instance.mentalPoints++;
+        }
+        string rewardText = $"{rewardType} increased as a reward!";
+
+        StartCoroutine(UIManager.Instance.ShowMessage("You Win!", "Back:)", rewardText));
+
         Debug.Log("YOU WIN!");
     }
 
@@ -339,10 +360,76 @@ public class SimulationManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(UIManager.Instance.ShowMessage("You lose:(", "Back:("));
+        Stat statReward = DetermineReward(false); // false — это поражение
+
+        string rewardType = "";
+
+        if (statReward.Abbreviation == "STR" || statReward.Abbreviation == "END" || statReward.Abbreviation == "AGI")
+        {
+            rewardType = "Physical Parameters";
+            GameManager.Instance.physicsPoints++;
+        }
+        else if (statReward.Abbreviation == "LOG" || statReward.Abbreviation == "CRE" || statReward.Abbreviation == "LRN")
+        {
+            rewardType = "Intellectual Parameters";
+            GameManager.Instance.intellectPoints++;
+        }
+        else if (statReward.Abbreviation == "EMO" || statReward.Abbreviation == "SOC" || statReward.Abbreviation == "MOT")
+        {
+            rewardType = "Mental Parameters";
+            GameManager.Instance.mentalPoints++;
+        }
+        string rewardText = $"{rewardType} increased as a consolation prize!";
+
+        StartCoroutine(UIManager.Instance.ShowMessage("You lose:(", "Back:(", rewardText));
 
         Debug.Log("YOU LOSE!");
     }
+
+    private Stat DetermineReward(bool isVictory)
+    {
+        if (isVictory)
+        {
+            return DetermineMaxStat();  // Возвращаем максимальный стат при победе
+        }
+        else
+        {
+            return DetermineMinStat();  // Возвращаем минимальный стат при поражении
+        }
+    }
+
+    private Stat DetermineMinStat()
+    {
+        Stat minStat = humanityStats[0]; // Инициализируем первым статом
+
+        // Поиск стата с минимальным значением среди человечества
+        foreach (Stat stat in humanityStats)
+        {
+            if (stat.Value < minStat.Value)
+            {
+                minStat = stat;
+            }
+        }
+
+        return minStat;
+    }
+
+    private Stat DetermineMaxStat()
+    {
+        Stat maxStat = humanityStats[0]; // Инициализируем первым статом
+
+        // Поиск стата с максимальным значением среди человечества
+        foreach (Stat stat in humanityStats)
+        {
+            if (stat.Value > maxStat.Value)
+            {
+                maxStat = stat;
+            }
+        }
+
+        return maxStat;
+    }
+
 
     bool CheckForNextEraConditions()
     {
