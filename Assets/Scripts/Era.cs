@@ -9,6 +9,4 @@ public class Era
     public int survivalThreshold;  // Порог выживания (или условие)
     public Sprite successSprite;  // Спрайт, если эпоха успешна
     public Sprite failureSprite;  // Спрайт, если эпоха провалена
-    public List<string> EventNames;
-    public List<List<Stat>> EventReqs;
 }

@@ -25,6 +25,8 @@ public class SimulationManager : MonoBehaviour
     public List<Era> eras = new List<Era>();
     public int currentEraIndex = 0;
 
+    public int amountOfCompletedEvents = 0;
+
     void Start()
     {
         man = HumanManager.Instance.chosenMan;
@@ -53,6 +55,8 @@ public class SimulationManager : MonoBehaviour
     {
         UIManager.Instance.ChangeSimulationBackground(era.successSprite);
 
+        UpdateEventsPanel(era);
+        
         // Display the initial message
         yield return StartCoroutine(UIManager.Instance.ShowStartEraMessage(era));
 
@@ -67,6 +71,76 @@ public class SimulationManager : MonoBehaviour
         yield return StartCoroutine(StartQuestCycle());
     }
 
+    private void UpdateEventsPanel(Era era)
+    {
+        CheckForHappenedEvents(era);
+        UIManager.Instance.UpdateEventsPanel(era);
+    }
+
+    private void CheckForHappenedEvents(Era era)
+    {
+        int numHappenedEvents = 0;
+
+        if(era.events != null)
+        {
+            // Перебираем все события в текущей эре
+            foreach (EraEvent eraEvent in era.events)
+            {
+                bool allRequirementsMet = true;
+
+                // Перебираем все требования текущего события
+                foreach (Stat requirement in eraEvent.eventReqs)
+                {
+                    // Проверяем, существует ли требуемая статистика в текущих статах
+                    Stat currentStat = GetCurrentStat(requirement.Abbreviation);
+
+                    // Если текущая статистика меньше требуемой, то условие не выполнено
+                    if (currentStat == null || currentStat.Value < requirement.Value)
+                    {
+                        allRequirementsMet = false;
+                        break;
+                    }
+                }
+
+                // Если все требования выполнены, событие произошло
+                eraEvent.happened = allRequirementsMet;
+                numHappenedEvents++;
+            }
+
+            amountOfCompletedEvents = numHappenedEvents;
+        }
+    }
+
+    // Метод для получения текущей статистики по аббревиатуре
+    private Stat GetCurrentStat(string abbreviation)
+    {
+        Stat statToReturn = null;
+
+        // Проверка текущих статистик человечества (man и woman)
+        foreach (Stat stat in humanityStats) // humanityStats — это список текущих статей человечества
+        {
+            if (stat.Abbreviation == abbreviation)
+            {
+                statToReturn = stat;
+                break;
+            }
+        }
+
+        if (statToReturn == null)
+        {
+            foreach(Stat stat in abstractStats)
+            {
+                if(stat.Abbreviation == abbreviation)
+                {
+                    statToReturn = stat;
+                    break;
+                }
+            }
+        }
+       
+        return statToReturn;
+    }
+
     // Cycle through quests
     public IEnumerator StartQuestCycle()
     {
@@ -75,12 +149,15 @@ public class SimulationManager : MonoBehaviour
 
         // Show first quest
         yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[0]));
+        UpdateEventsPanel(currentEra);
 
         // Show second quest
         yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[1]));
+        UpdateEventsPanel(currentEra);
 
         // Show third quest
         yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[2]));
+        UpdateEventsPanel(currentEra);
 
         bool ToNextEra = CheckForNextEraConditions();
 
@@ -155,7 +232,7 @@ public class SimulationManager : MonoBehaviour
                     statToUpdate.Value += statChange;
 
                     // Обновляем UI с новым значением статы
-                    UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractPanel");
+                    UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractStatsPanel");
                 }
             }
             else
@@ -262,9 +339,32 @@ public class SimulationManager : MonoBehaviour
         Debug.Log("YOU LOSE!");
     }
 
-    // Check the events for the "Primitive Society" era
     bool CheckForNextEraConditions()
     {
-        return false;
+
+        foreach (Stat stat in humanityStats)
+        {
+            if (stat.Value < 0)
+            {
+                return false;
+            }
+        }
+
+        foreach (Stat stat in abstractStats)
+        {
+            if (stat.Value < 0)
+            {
+                return false;
+            }
+        }
+
+        if (amountOfCompletedEvents >= UIManager.Instance.requiredNumOfEvents)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

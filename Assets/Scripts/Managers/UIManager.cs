@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,15 +16,18 @@ public class UIManager : MonoBehaviour
     private PulsingObject pulsingStartButton;
 
     public GameObject answerButtonPrefab;
+    public GameObject eventPrefab;
 
     private GameObject questCanvas;
     private GameObject questPanel;
     private GameObject buttonsLayout;
+    public GameObject eventsPanel;
 
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
     public CanvasGroup transitionCanvasGroup;
 
+    public int requiredNumOfEvents = 3;
     public static UIManager Instance
     {
         get
@@ -87,6 +91,61 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public void UpdateEventsPanel(Era era)
+    {
+        Transform parentLayout = eventsPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject.transform;
+
+        // Удаляем все дочерние объекты под родителем
+        foreach (Transform child in parentLayout)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int numHappenedEvents = 0;
+
+        if(era.events != null)
+        {
+            // Далее идёт ваш код для обновления панели событий
+            foreach (EraEvent eraEvent in era.events)
+            {
+                GameObject panel = Instantiate(eventPrefab, parentLayout);
+
+                // Изменяем цвет панели
+                Image panelImage = panel.GetComponent<Image>();
+                if (panelImage != null)
+                {
+                    if (eraEvent.happened)
+                    {
+                        panelImage.color = new Color32(85, 171, 154, 255);  // #55AB9A в RGB
+                        numHappenedEvents++;
+                    }
+                    else
+                    {
+                        panelImage.color = new Color32(171, 85, 93, 255);  // #AB555D в RGB
+                    }
+                }
+
+                panel.transform.Find("EventTitle").GetComponent<TextMeshProUGUI>().text = eraEvent.eventName;
+                panel.transform.Find("EventReqsText").GetComponent<TextMeshProUGUI>().text = "Need ";
+
+                // Обработка требований события
+                for (int i = 0; i < eraEvent.eventReqs.Count; i++)
+                {
+                    panel.transform.Find("EventReqsText").GetComponent<TextMeshProUGUI>().text +=
+                        $">{eraEvent.eventReqs[i].Abbreviation}:{eraEvent.eventReqs[i].Value - 1}";
+                    if (i != eraEvent.eventReqs.Count - 1)
+                    {
+                        panel.transform.Find("EventReqsText").GetComponent<TextMeshProUGUI>().text += ", ";
+                    }
+                }
+            }
+
+            eventsPanel.transform.Find("CompletedEventsText").GetComponent<TextMeshProUGUI>().text = $"Completed events {numHappenedEvents}/{requiredNumOfEvents} needed";
+        }
+    }
+
+
 
     public void UpdateStatsPanel(List<Stat> stats, string panelName)
     {
@@ -162,9 +221,6 @@ public class UIManager : MonoBehaviour
 
         // Wait for the user to select an answer (button click)
         yield return new WaitUntil(() => !questPanel.activeSelf); // Wait until the quest canvas is hidden
-
-        // After the quest is answered, you can proceed with other actions
-        yield return new WaitForSeconds(1f);  // Optionally wait before moving on
     }
 
     // Function to clear the answer buttons
