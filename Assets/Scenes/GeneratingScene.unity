@@ -4752,9 +4752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b920ab121f4ab4fb2077d24b1d94b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicsPoints: 5
-  intellectPoints: 5
-  mentalPoints: 5
+  physicsPoints: 30
+  intellectPoints: 30
+  mentalPoints: 30
 --- !u!4 &1181527814
 Transform:
   m_ObjectHideFlags: 0

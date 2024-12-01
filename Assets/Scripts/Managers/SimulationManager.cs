@@ -396,7 +396,7 @@ public class SimulationManager : MonoBehaviour
         }
         string rewardText = $"{rewardType} increased as a reward!";
 
-        StartCoroutine(UIManager.Instance.ShowMessage("You Win!", "Back:)", rewardText));
+        StartCoroutine(UIManager.Instance.ShowMessage("Pupa and Lupa managed to rebuild human civilization and lead it to success!", "Back", rewardText));
 
         Debug.Log("YOU WIN!");
     }
@@ -428,7 +428,7 @@ public class SimulationManager : MonoBehaviour
         }
         string rewardText = $"{rewardType} increased as a consolation prize!";
 
-        StartCoroutine(UIManager.Instance.ShowMessage("You lose:(", "Back:(", rewardText));
+        StartCoroutine(UIManager.Instance.ShowMessage("Pupa and Lupa were disappointed, even though they are robots and have no feelings, that it didn't work out this time. But they are not giving up.", "Back", rewardText));
 
         Debug.Log("YOU LOSE!");
     }

@@ -298,7 +298,7 @@ public class UIManager : MonoBehaviour
         }
 
         // After button click, check if the button text contains "Back"
-        if (textForButton.Contains("Back"))
+        if (textForButton == "Back")
         {
             // Load the previous scene or desired scene
             // Replace "PreviousScene" with the actual scene name or use SceneManager.LoadScene("YourSceneName");
@@ -326,37 +326,37 @@ public class UIManager : MonoBehaviour
         else if (era.eraName.Contains("Ancient"))
         {
             descriptionText = "The Rise of Ancient Civilization";
-            textForConfirmButton = "Great empires are forming. Will they focus on war or peace?";
+            textForConfirmButton = "Veni, vidi, vici!";
         }
         else if (era.eraName.Contains("Antiquity"))
         {
             descriptionText = "Antiquity era";
-            textForConfirmButton = "Great empires are forming. Will they focus on war or peace?";
+            textForConfirmButton = "All roads lead here!";
         }
         else if (era.eraName.Contains("Middle"))
         {
             descriptionText = "The Middle Ages Era";
-            textForConfirmButton = "Knights, castles, and kingdoms are emerging. What path will humanity choose?";
+            textForConfirmButton = "Winter is coming!";
         }
         else if (era.eraName.Contains("Renaissance"))
         {
             descriptionText = "The Renaissance Era";
-            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+            textForConfirmButton = "Nothing is true, everything is permitted";
         }
         else if (era.eraName.Contains("Modern"))
         {
             descriptionText = "Modern Era";
-            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+            textForConfirmButton = "No one messes with the Peaky Blinders";
         }
         else if (era.eraName.Contains("Our"))
         {
-            descriptionText = "Our time Era";
-            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+            descriptionText = "Our last time Era";
+            textForConfirmButton = "WE are back baby!";
         }
         else if (era.eraName.Contains("Future"))
         {
-            descriptionText = "Future Era";
-            textForConfirmButton = "A rebirth of knowledge, culture, and art. How will society evolve?";
+            descriptionText = "Future";
+            textForConfirmButton = "Back to the future";
         }
 
         // Вызываем ShowMessage для отображения текста
