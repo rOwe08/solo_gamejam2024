@@ -359,7 +359,7 @@ public class QuestManager : MonoBehaviour
                 }
             ));
         }
-        else if (era.eraName.Contains("Renaissence"))
+        else if (era.eraName.Contains("Renaissance"))
         {
             quests.Add(new Quest(
                 "The Age of Exploration", "RenaissanceEra",
@@ -537,7 +537,7 @@ public class QuestManager : MonoBehaviour
                 {
         new QuestAnswer("Use it to spread political ideologies", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
         new QuestAnswer("Use it to promote cultural values and art", new List<string> { "CUL +2", "SOC -1" }), // Культура, снижение социальных навыков
-        new QuestAnswer("Use it to manipulate public opinion for control", new List<string> { "SOC -2", "MOT +1" }) // Снижение социальных навыков, увеличение мотивации
+        new QuestAnswer("Use it to manipulate public opinion for control", new List<string> { "MOT +1", "SOC -2" }) // Снижение социальных навыков, увеличение мотивации
                 }
             ));
 
@@ -607,7 +607,7 @@ public class QuestManager : MonoBehaviour
                 {
         new QuestAnswer("Implement green technologies to reduce emissions", new List<string> { "CUL +1", "SCI -1" }), // Культура, снижение науки
         new QuestAnswer("Focus on adaptation and infrastructure to withstand climate change", new List<string> { "SOC +2", "STR -1" }), // Социальные навыки, снижение силы
-        new QuestAnswer("Prioritize economic growth over climate concerns", new List<string> { "SCI -2", "LOG +1" }) // Наука, увеличение логики
+        new QuestAnswer("Prioritize economic growth over climate concerns", new List<string> { "LOG +1", "SCI -2" }) // Наука, увеличение логики
                 }
             ));
 
