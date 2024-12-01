@@ -3542,6 +3542,7 @@ MonoBehaviour:
   answerButtonPrefab: {fileID: 3134723581602239909, guid: 68419cdb6ab32d847bcd9f4f0d23d7bf, type: 3}
   eventPrefab: {fileID: 8280675246238554500, guid: f5264f55fa4f5c9428de019649294ee8, type: 3}
   eventsPanel: {fileID: 0}
+  resultText: {fileID: 733866677146777009, guid: fe8e51a42b2415e4e9c4297442565ba7, type: 3}
   transitionImage: {fileID: 553679871}
   transitionCanvasGroup: {fileID: 0}
   requiredNumOfEvents: 3

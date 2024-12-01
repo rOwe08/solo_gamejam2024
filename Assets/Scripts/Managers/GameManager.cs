@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ApplyResult(string result)
+    public void ApplyResult(List<string> result)
     {
         GameObject simulationManager = GameObject.Find("SimulationManager");
 

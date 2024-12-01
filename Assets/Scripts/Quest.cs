@@ -6,12 +6,12 @@ using UnityEngine;
 public class QuestAnswer
 {
     public string Description;
-    public string Result;
+    public List<string> Result;
 
     public Action OnChosen;
 
     // Constructor to initialize the quest answer
-    public QuestAnswer(string description, string result, Action onChosen = null)
+    public QuestAnswer(string description, List<string> result, Action onChosen = null)
     {
         Description = description;
         Result = result;

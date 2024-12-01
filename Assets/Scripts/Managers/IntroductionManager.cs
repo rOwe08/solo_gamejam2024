@@ -56,8 +56,6 @@ public class IntroductionManager : MonoBehaviour
 
     public void StartIntroduction()
     {
-        Debug.Log("StartIntroduction called");
-
         // Сдвигаем панели из-за экрана
         leftPanel.localPosition = new Vector3(-Screen.width, leftPanel.localPosition.y, leftPanel.localPosition.z);
         rightPanel.localPosition = new Vector3(Screen.width, rightPanel.localPosition.y, rightPanel.localPosition.z);
@@ -67,7 +65,6 @@ public class IntroductionManager : MonoBehaviour
         rightPanel.DOLocalMoveX(0, panelMoveDuration).SetEase(Ease.OutCubic)
             .OnComplete(() =>
             {
-                Debug.Log("Panels moved, starting text typing.");
                 // Запуск печатания текста на панелях после того, как панели окажутся на экране
                 StartTypingText();
             });
@@ -75,7 +72,6 @@ public class IntroductionManager : MonoBehaviour
 
     private void StartTypingText()
     {
-        Debug.Log("StartTypingText called");
 
         // Начинаем печатать текст на левой панели
         if (leftPanelTextQueue.Count > 0)
@@ -107,7 +103,6 @@ public class IntroductionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No right text to print.");
             OnLastMessagePrinted();
         }
     }

@@ -264,27 +264,39 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-    public void ApplyResult(string result)
+    public void ApplyResult(List<string> result)
     {
-        // Разделяем результат, чтобы получить статы и их значения
-        string[] resultParts = result.Split(' ');
 
-        // Если результат состоит из нескольких частей, то обработаем каждую часть
-        if (resultParts.Length == 2)
+        foreach(string s in result)
         {
-            string statAbbreviation = resultParts[0]; // Аббревиатура статы (например, "CUL")
-            float statChange = float.Parse(resultParts[1]); // Изменение статы (например, "+1" или "-1")
+            // Разделяем результат, чтобы получить статы и их значения
+            string[] resultParts = s.Split(' ');
 
-            // Находим соответствующую стату в humanityStats
-            Stat statToUpdate = humanityStats.Find(stat => stat.Abbreviation == statAbbreviation);
-
-            if (statToUpdate == null)
+            // Если результат состоит из нескольких частей, то обработаем каждую часть
+            if (resultParts.Length == 2)
             {
-                statToUpdate = abstractStats.Find(stat => stat.Abbreviation == statAbbreviation);
+                string statAbbreviation = resultParts[0]; // Аббревиатура статы (например, "CUL")
+                float statChange = float.Parse(resultParts[1]); // Изменение статы (например, "+1" или "-1")
+
+                // Находим соответствующую стату в humanityStats
+                Stat statToUpdate = humanityStats.Find(stat => stat.Abbreviation == statAbbreviation);
 
                 if (statToUpdate == null)
                 {
-                    Debug.Log($"{statAbbreviation}DOESNT EXIST!");
+                    statToUpdate = abstractStats.Find(stat => stat.Abbreviation == statAbbreviation);
+
+                    if (statToUpdate == null)
+                    {
+                        Debug.Log($"{statAbbreviation}DOESNT EXIST!");
+                    }
+                    else
+                    {
+                        // Применяем изменение
+                        statToUpdate.Value += statChange;
+
+                        // Обновляем UI с новым значением статы
+                        UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractStatsPanel");
+                    }
                 }
                 else
                 {
@@ -292,16 +304,8 @@ public class SimulationManager : MonoBehaviour
                     statToUpdate.Value += statChange;
 
                     // Обновляем UI с новым значением статы
-                    UIManager.Instance.UpdateStatsPanel(abstractStats, "AbstractStatsPanel");
+                    UIManager.Instance.UpdateStatsPanel(humanityStats, "StatsPanel");
                 }
-            }
-            else
-            {
-                // Применяем изменение
-                statToUpdate.Value += statChange;
-
-                // Обновляем UI с новым значением статы
-                UIManager.Instance.UpdateStatsPanel(humanityStats, "StatsPanel");
             }
         }
         

@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     private GameObject buttonsLayout;
     public GameObject eventsPanel;
 
+    public GameObject resultText;
+
     // Новый объект для перехода (покрывающий экран)
     public Image transitionImage;
     public CanvasGroup transitionCanvasGroup;
@@ -199,19 +201,26 @@ public class UIManager : MonoBehaviour
             // Instantiate the button from the prefab
             GameObject answerButton = Instantiate(answerButtonPrefab, buttonsLayout.transform);
             TextMeshProUGUI buttonText = answerButton.transform.Find("ButtonText").GetComponent<TextMeshProUGUI>(); // Find the text component inside the button prefab
-            TextMeshProUGUI resultText = answerButton.transform.Find("ResultText").GetComponent<TextMeshProUGUI>(); // Find the text component inside the button prefab
+            Transform resultPanel = answerButton.transform.Find("ResultPanel");
 
             // Set the button text to the answer's text
             buttonText.text = quest.Answers[i].Description;
-            resultText.text = quest.Answers[i].Result;
 
-            if (resultText.text.Contains("+"))
+            foreach (string result in quest.Answers[i].Result)
             {
-                resultText.color = Color.green;
-            }
-            else
-            {
-                resultText.color = Color.red;
+                GameObject spawnedResultText = Instantiate(resultText, resultPanel);
+                TextMeshProUGUI spawnedResult = spawnedResultText.GetComponent<TextMeshProUGUI>();
+
+                spawnedResult.text = result;
+
+                if (spawnedResult.text.Contains("+"))
+                {
+                    spawnedResult.color = Color.green;
+                }
+                else
+                {
+                    spawnedResult.color = Color.red;
+                }
             }
 
             // Use a local variable to capture the current value of 'i'
