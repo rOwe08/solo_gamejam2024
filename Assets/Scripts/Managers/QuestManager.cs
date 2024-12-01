@@ -58,9 +58,9 @@ public class QuestManager : MonoBehaviour
                 "The discovery of fire will change humanity's future. What should it be used for?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Warmth and cooking", new List<string> { "END +1" }),
-            new QuestAnswer("Weapons and defense", new List<string> { "STR +1" }),
-            new QuestAnswer("Rituals and community bonding", new List<string> { "REL +1" })
+            new QuestAnswer("Warmth and cooking", new List<string> { "MOT +1", "LRN +1" }),
+            new QuestAnswer("Weapons and defense", new List<string> { "STR +1", "END +1" }),
+            new QuestAnswer("Rituals and community bonding", new List<string> { "REL +1", "SOC +1" })
                 }
             ));
 
@@ -79,8 +79,8 @@ public class QuestManager : MonoBehaviour
                 "A severe drought is threatening the community's food supply. What should be done?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on hunting, even if it's dangerous", new List<string> { "AGI -1" }),
-            new QuestAnswer("Conserve water, but risk dehydration", new List<string> { "END -1" })
+            new QuestAnswer("Focus on hunting, even if it's dangerous", new List<string> { "STR +1", "AGI -1" }),
+            new QuestAnswer("Conserve water, but risk dehydration", new List<string> { "AGI +1","END -1" })
                 }
             ));
 
@@ -89,8 +89,8 @@ public class QuestManager : MonoBehaviour
                 "Should humanity prioritize hunting or farming as their primary food source?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on hunting for meat", new List<string> { "STR +1" }),
-            new QuestAnswer("Focus on farming for stable food", new List<string> { "END +1" })
+            new QuestAnswer("Focus on hunting for meat", new List<string> { "STR +1", "EMO -1" }),
+            new QuestAnswer("Focus on farming for stable food", new List<string> { "END +1", "MOT -1" })
                 }
             ));
 
@@ -99,8 +99,8 @@ public class QuestManager : MonoBehaviour
                 "Tensions are rising between neighboring tribes. How should humankind respond?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Avoid conflicts", new List<string> { "STR -1" }),
-            new QuestAnswer("Prepare for war", new List<string> { "AGI -1" })
+            new QuestAnswer("Avoid conflicts", new List<string> { "EMO +1", "STR -1", }),
+            new QuestAnswer("Prepare for war", new List<string> { "MOT +1", "AGI -1" })
                 }
             ));
 
@@ -132,8 +132,8 @@ public class QuestManager : MonoBehaviour
                 "A monarchy is being established. How should the leader be chosen?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Through divine right", new List<string> { "REL +1" }),
-            new QuestAnswer("Through election by the people", new List<string> { "SOC +1" })
+            new QuestAnswer("Through divine right", new List<string> { "REL +1", "CUL +1" }),
+            new QuestAnswer("Through election by the people", new List<string> { "SOC +1", "LOG +1" })
                 }
             ));
 
@@ -142,8 +142,8 @@ public class QuestManager : MonoBehaviour
                 "A plague has spread across the land. How should people respond?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on prayers and rituals, neglecting other needs", new List<string> { "REL -1" }),
-            new QuestAnswer("Quarantine the sick, risking social unrest", new List<string> { "SOC -1" })
+            new QuestAnswer("Focus on prayers and rituals, neglecting other needs", new List<string> { "REL +2", "EMO -1", "STR -1" }),
+            new QuestAnswer("Quarantine the sick, risking social unrest", new List<string> { "END +1", "SOC -1" })
                 }
             ));
 
@@ -152,8 +152,8 @@ public class QuestManager : MonoBehaviour
                 "Should we build a massive monument for the leaders or use resources elsewhere?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Build the pyramid to honor the leader", new List<string> { "CUL +1" }),
-            new QuestAnswer("Use resources for public works", new List<string> { "MOT +1" })
+            new QuestAnswer("Build the pyramid to honor the leader", new List<string> { "CUL +1", "AGI -1" }),
+            new QuestAnswer("Use resources for public works", new List<string> { "MOT +2" })
                 }
             ));
 
@@ -174,8 +174,8 @@ public class QuestManager : MonoBehaviour
                 "A new form of government is emerging. How should the power be distributed?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Give power to the people through voting", new List<string> { "SOC +1" }), // Социальные навыки через демократию
-            new QuestAnswer("Concentrate power in the hands of a few elites", new List<string> { "CUL +1" }) // Культура через влияние элиты
+            new QuestAnswer("Give power to the people through voting", new List<string> { "SOC +1", "MOT +1" }), // Социальные навыки через демократию
+            new QuestAnswer("Concentrate power in the hands of a few elites", new List<string> { "CUL +1", "MOT -1" }) // Культура через влияние элиты
                 }
             ));
 
@@ -195,10 +195,10 @@ public class QuestManager : MonoBehaviour
                 "A new technology has emerged: Iron. How should it be used?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Use it for weapons and defense", new List<string> { "STR +1" }), // Сила через оружие
-            new QuestAnswer("Use it for tools and farming", new List<string> { "CRE +1" }), // Креативность через создание инструментов
-            new QuestAnswer("Use it for scientific research", new List<string> { "SCI +1" }),
-            new QuestAnswer("Use it for building structures", new List<string> { "CUL +1" }) // Культура через архитектуру
+            new QuestAnswer("Use it for weapons and defense", new List<string> { "STR +2" }), // Сила через оружие
+            new QuestAnswer("Use it for tools and farming", new List<string> { "CRE +1", "LRN +1" }), // Креативность через создание инструментов
+            new QuestAnswer("Use it for scientific research", new List<string> { "SCI +2" }),
+            new QuestAnswer("Use it for building structures", new List<string> { "CUL +2" }) // Культура через архитектуру
                 }
             ));
 
@@ -207,7 +207,7 @@ public class QuestManager : MonoBehaviour
                 "Philosophers are questioning the nature of the world. What should be the focus?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on ethics and morality", new List<string> { "LOG +1" }), // Логика через моральные вопросы
+            new QuestAnswer("Focus on ethics and morality", new List<string> { "LOG +1", "MOT +1" }), // Логика через моральные вопросы
             new QuestAnswer("Focus on the study of the natural world", new List<string> { "SCI +1" }) // Наука через естествознание
                 }
             ));
@@ -217,8 +217,8 @@ public class QuestManager : MonoBehaviour
                 "The empire is expanding too fast. What are the consequences?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Weak leadership causes internal strife", new List<string> { "MOT -1" }), // Потеря мотивации
-            new QuestAnswer("Increased demands cause fatigue in citizens", new List<string> { "END -1" }) // Потеря выносливости
+            new QuestAnswer("Weak leadership causes internal strife", new List<string> { "MOT -2" }), // Потеря мотивации
+            new QuestAnswer("Increased demands cause fatigue in citizens", new List<string> { "END -1", "MOT -1" }) // Потеря выносливости
                 }
             ));
 
@@ -227,8 +227,8 @@ public class QuestManager : MonoBehaviour
                 "Trade routes are expanding across the world. What should be prioritized?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Increase trade with neighboring civilizations", new List<string> { "SOC +1" }), // Социальные навыки через торговлю
-            new QuestAnswer("Establish new trade routes with distant lands", new List<string> { "LRN +1" }) // Обучаемость через новые контакты
+            new QuestAnswer("Increase trade with neighboring civilizations", new List<string> { "SOC +1", "AGI +1" }), // Социальные навыки через торговлю
+            new QuestAnswer("Establish new trade routes with distant lands", new List<string> { "AGI +2" }) // Обучаемость через новые контакты
                 }
             ));
 
@@ -237,8 +237,8 @@ public class QuestManager : MonoBehaviour
                 "The city-state model is beginning to decline. What should be done?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Form larger kingdoms or empires", new List<string> { "STR +1" }), // Сила через объединение
-            new QuestAnswer("Focus on creating strong local communities", new List<string> { "SOC +1" }) // Социальные навыки через локальные сообщества
+            new QuestAnswer("Form larger kingdoms or empires", new List<string> { "STR +1", "CUL +1" }), // Сила через объединение
+            new QuestAnswer("Focus on creating strong local communities", new List<string> { "SOC +2", "LOG -1" }) // Социальные навыки через локальные сообщества
                 }
             ));
 
@@ -248,8 +248,8 @@ public class QuestManager : MonoBehaviour
                 new List<QuestAnswer>
                 {
             new QuestAnswer("Focus on astronomy and the study of the stars", new List<string> { "SCI +1" }), // Наука через астрономию
-            new QuestAnswer("Focus on medicine and improving healthcare", new List<string> { "LOG +1" }), // Логика через медицинские исследования
-            new QuestAnswer("Focus on mathematics and geometry", new List<string> { "LRN +1" }) // Обучаемость через математику
+            new QuestAnswer("Focus on medicine and improving healthcare", new List<string> { "LOG +1", "STR +1" }), // Логика через медицинские исследования
+            new QuestAnswer("Focus on mathematics and geometry", new List<string> { "LRN +2" }) // Обучаемость через математику
                 }
             ));
 
@@ -270,8 +270,29 @@ public class QuestManager : MonoBehaviour
                 "Feudalism is spreading throughout the land. How should the system be structured?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Give power to a single monarch", new List<string> { "STR +1" }), // Сила через централизованную власть
-            new QuestAnswer("Divide power among local lords", new List<string> { "SOC +1" }) // Социальные навыки через распределение власти
+            new QuestAnswer("Give power to a single monarch", new List<string> { "STR +1", "END +1", "MOT -1" }), // Сила через централизованную власть
+            new QuestAnswer("Divide power among local lords", new List<string> { "SOC +1", "MOT +1" }) // Социальные навыки через распределение власти
+                }
+            ));
+
+            quests.Add(new Quest(
+                "The Fall of the Roman Empire", "MiddleAgesEra",
+                "The Roman Empire has fallen, leaving chaos in its wake. How should people respond?",
+                new List<QuestAnswer>
+                {
+                    new QuestAnswer("Embrace chaos and allow for the rise of new powers", new List<string> { "CUL -2" }), // Сила через подрыв стабильности
+                    new QuestAnswer("Let the barbarians take control", new List<string> { "STR -1", "SOC -1", "EMO -1" }) // Социальные навыки через разрушение порядка
+                }
+            ));
+
+            // The Rise of Heresy
+            quests.Add(new Quest(
+                "The Rise of Heresy", "MiddleAgesEra",
+                "Heresy is spreading, challenging traditional religious beliefs. What should be done about it?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Persecute heretics to preserve religious unity", new List<string> { "REL -1", "MOT -1" }), // Религия через преследование еретиков
+        new QuestAnswer("Allow heresy to spread freely without interference", new List<string> { "SOC -1", "EMO -1" }) // Социальные навыки через дестабилизацию общества
                 }
             ));
 
@@ -280,8 +301,8 @@ public class QuestManager : MonoBehaviour
                 "A plague is sweeping across the land. How should people respond?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Quarantine and isolate the infected", new List<string> { "SOC +1" }), // Социальные навыки через изоляцию больных
-            new QuestAnswer("Focus on finding a cure", new List<string> { "SCI +1" }) // Наука через поиск лекарства
+            new QuestAnswer("Quarantine and isolate the infected", new List<string> { "STR +1", "END +1", "SOC -1", "EMO -2" }), // Социальные навыки через изоляцию больных
+            new QuestAnswer("Focus on finding a cure", new List<string> { "SCI +1", "MOT +1", "SOC -2", "STR -2" }) // Наука через поиск лекарства
                 }
             ));
 
@@ -290,9 +311,9 @@ public class QuestManager : MonoBehaviour
                 "The Catholic Church is gaining immense power. What should its role be?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Maintain the power of the church and its influence", new List<string> { "REL +1" }), // Религия через сохранение влияния церкви
-            new QuestAnswer("Separate religion from state affairs", new List<string> { "CUL +1" }), // Культура через отделение религии от государства
-            new QuestAnswer("Use the church to unify the population", new List<string> { "SOC +1" }) // Социальные навыки через объединение народа
+        new QuestAnswer("Maintain the power of the church and its influence", new List<string> { "REL +2", "SOC -1" }), // Религия и социальные навыки через усиление влияния церкви
+        new QuestAnswer("Separate religion from state affairs", new List<string> { "CUL +2", "SOC -1" }), // Культура через отделение религии, снижение социальных навыков
+        new QuestAnswer("Use the church to unify the population", new List<string> { "SOC +2", "REL -1" }) // Социальные навыки через объединение, потеря религиозной власти
                 }
             ));
 
@@ -301,9 +322,9 @@ public class QuestManager : MonoBehaviour
                 "Castles are being built to defend against invaders. What should their primary purpose be?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on defense and military strategy", new List<string> { "STR +1" }), // Сила через оборону
-            new QuestAnswer("Use them as symbols of power and authority", new List<string> { "CUL +1" }), // Культура через символ власти
-            new QuestAnswer("Create centers of culture and learning within them", new List<string> { "CRE +1" }) // Креативность через развитие культурных центров
+        new QuestAnswer("Focus on defense and military strategy", new List<string> { "STR +2", "CUL -1" }), // Сила через оборону, потеря культуры
+        new QuestAnswer("Use them as symbols of power and authority", new List<string> { "CUL +2", "STR -1" }), // Культура через символы власти, потеря силы
+        new QuestAnswer("Create centers of culture and learning within them", new List<string> { "CRE +2", "STR -1" }) // Креативность через культурные центры, потеря военной мощи
                 }
             ));
 
@@ -312,8 +333,8 @@ public class QuestManager : MonoBehaviour
                 "A new legal document is being proposed to limit the king's power. Should humankind support it?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Support it to ensure justice and rights", new List<string> { "SOC +1" }), // Социальные навыки через справедливость
-            new QuestAnswer("Reject it to maintain the monarch's power", new List<string> { "STR +1" }) // Сила через сохранение власти монарха
+        new QuestAnswer("Support it to ensure justice and rights", new List<string> { "SOC +2", "STR -1" }), // Социальные навыки через справедливость, снижение силы монарха
+        new QuestAnswer("Reject it to maintain the monarch's power", new List<string> { "STR +2", "SOC -1" }) // Сила через сохранение власти монарха, снижение социальных навыков
                 }
             ));
 
@@ -322,19 +343,8 @@ public class QuestManager : MonoBehaviour
                 "Craftsmen and traders are forming guilds. What should their role be?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Encourage the formation of guilds to protect workers", new List<string> { "SOC +1" }), // Социальные навыки через защиту рабочих
-            new QuestAnswer("Ban the guilds to ensure control by the state", new List<string> { "STR +1" }) // Сила через запрет гильдий
-                }
-            ));
-
-
-            quests.Add(new Quest(
-                "The Rise of Guilds", "MiddleAgesEra",
-                "Craftsmen and traders are forming guilds. What should their role be?",
-                new List<QuestAnswer>
-                {
-        new QuestAnswer("Encourage the formation of guilds to protect workers", new List<string> { "SOC +1" }), // Социальные навыки через защиту рабочих
-        new QuestAnswer("Ban the guilds to ensure control by the state", new List<string> { "STR +1" }) // Сила через запрет гильдий
+        new QuestAnswer("Encourage the formation of guilds to protect workers", new List<string> { "SOC +2", "STR -1" }), // Социальные навыки через защиту рабочих, уменьшение власти государства
+        new QuestAnswer("Ban the guilds to ensure control by the state", new List<string> { "STR +2", "SOC -1" }) // Сила через запрет гильдий, снижение социальных навыков
                 }
             ));
 
@@ -343,31 +353,33 @@ public class QuestManager : MonoBehaviour
                 "A new printing press has been invented. What should people do with it?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Use it to spread religious texts", new List<string> { "REL +1" }), // Религия через распространение текстов
-        new QuestAnswer("Use it to spread knowledge and education", new List<string> { "SCI +1" }), // Наука через образование
-        new QuestAnswer("Control its use to maintain political power", new List<string> { "SOC -1" }) // Отрицательный эффект на социальные навыки через контроль информации
+        new QuestAnswer("Use it to spread religious texts", new List<string> { "REL +2", "SCI -1" }), // Религия через распространение текстов, потеря научных знаний
+        new QuestAnswer("Use it to spread knowledge and education", new List<string> { "SCI +2", "REL -1" }), // Наука через образование, потеря религиозного контроля
+        new QuestAnswer("Control its use to maintain political power", new List<string> { "SOC -2", "STR +1" }) // Социальные навыки - через контроль информации, увеличение силы государства
                 }
             ));
         }
-        else if (era.eraName.Contains("Middle"))
+        else if (era.eraName.Contains("Renaissence"))
         {
             quests.Add(new Quest(
-            "The Age of Exploration", "RenaissanceEra",
-            "The world is being mapped out and new lands are being discovered. What should humankind's focus be?",
-            new List<QuestAnswer>
-            {
-        new QuestAnswer("Focus on colonizing new lands", new List<string> { "STR +1" }), // Сила
-        new QuestAnswer("Focus on cultural exchange with the new world", new List<string> { "CUL +1" }) // Культура
-            }
-        ));
+                "The Age of Exploration", "RenaissanceEra",
+                "The world is being mapped out and new lands are being discovered. What should humankind's focus be?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Focus on colonizing new lands", new List<string> { "STR +1", "SOC -1" }), // Сила через колонизацию, уменьшение социальных навыков
+        new QuestAnswer("Focus on cultural exchange with the new world", new List<string> { "CUL +2", "SCI -1" }), // Культура через обмен, снижение науки
+        new QuestAnswer("Focus on trading with the new world to boost economy", new List<string> { "LRN +1", "CRE -1" }) // Экономика через торговлю, снижение креативности
+                }
+            ));
 
             quests.Add(new Quest(
                 "The Printing Revolution", "RenaissanceEra",
                 "Printing technology has advanced. What should be printed?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Print religious texts to spread faith", new List<string> { "REL +1" }), // Религия
-        new QuestAnswer("Print scientific works to spread knowledge", new List<string> { "SCI +1" }) // Наука
+        new QuestAnswer("Print religious texts to spread faith", new List<string> { "REL +1", "SOC -1" }), // Религия через распространение веры, уменьшение социальных навыков
+        new QuestAnswer("Print scientific works to spread knowledge", new List<string> { "SCI +2", "CRE -1" }), // Наука через распространение знаний, снижение креативности
+        new QuestAnswer("Print books for the common people to increase literacy", new List<string> { "LRN +1", "SOC -1", "CRE -1" }) // Образование через книги, снижение социальных и креативных навыков
                 }
             ));
 
@@ -376,8 +388,9 @@ public class QuestManager : MonoBehaviour
                 "Art is flourishing. What should be the focus of the artists?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Focus on realistic portrayals of the human form", new List<string> { "CRE +1" }), // Креативность
-        new QuestAnswer("Focus on abstract and symbolic representations", new List<string> { "LOG +1" }) // Логика
+        new QuestAnswer("Focus on realistic portrayals of the human form", new List<string> { "CRE +2", "LOG -1" }), // Креативность через реализм, снижение логики
+        new QuestAnswer("Focus on abstract and symbolic representations", new List<string> { "LOG +2", "CRE -1" }), // Логика через абстракцию, снижение креативности
+        new QuestAnswer("Focus on combining classical and modern styles", new List<string> { "CUL +2", "CRE -1" }) // Культура через смесь стилей, снижение креативности
                 }
             ));
 
@@ -386,9 +399,9 @@ public class QuestManager : MonoBehaviour
                 "New discoveries in science are challenging old beliefs. How should people proceed?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Support scientific discoveries to advance knowledge", new List<string> { "SCI +1" }), // Наука
-        new QuestAnswer("Maintain traditional beliefs to preserve order", new List<string> { "SOC -1" }), // Социальные навыки (негативно)
-        new QuestAnswer("Promote the use of science in practical inventions", new List<string> { "CRE +1" }) // Креативность
+        new QuestAnswer("Support scientific discoveries to advance knowledge", new List<string> { "SCI +2", "SOC -1" }), // Наука через открытия, снижение социальных навыков
+        new QuestAnswer("Maintain traditional beliefs to preserve order", new List<string> { "SOC +1", "SCI -2" }), // Социальные навыки через традиции, снижение науки
+        new QuestAnswer("Promote the use of science in practical inventions", new List<string> { "CRE +1", "SCI +1", "SOC -1" }) // Креативность и наука через практическое применение, снижение социальных навыков
                 }
             ));
 
@@ -397,8 +410,31 @@ public class QuestManager : MonoBehaviour
                 "A new telescope has been invented, expanding people's view of the universe. How should they use it?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Use it to explore the stars and expand our knowledge", new List<string> { "SCI +1" }), // Наука
-        new QuestAnswer("Use it for military surveillance and defense", new List<string> { "END -1" }) // Выносливость (негативно)
+        new QuestAnswer("Use it to explore the stars and expand our knowledge", new List<string> { "SCI +2", "SOC -1" }), // Наука через изучение звезд, снижение социальных навыков
+        new QuestAnswer("Use it for military surveillance and defense", new List<string> { "END -2", "STR +2" }), // Сила через оборону, снижение выносливости
+        new QuestAnswer("Use it to map the world and improve navigation", new List<string> { "LRN +1", "SCI +1" }) // Образование и наука через картографию и навигацию
+                }
+            ));
+
+            quests.Add(new Quest(
+                "The Rise of Secularism", "RenaissanceEra",
+                "The influence of religion is decreasing as secularism rises. How should society respond?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Promote secular ideas to advance rational thought", new List<string> { "LOG +2", "REL -1" }), // Логика через секуляризм, снижение религиозных навыков
+        new QuestAnswer("Support the church to maintain moral order", new List<string> { "REL +1", "SOC +1" }), // Религия и социальные навыки через поддержку церкви
+        new QuestAnswer("Encourage religious freedom but limit influence", new List<string> { "SOC +1", "CRE -1" }) // Социальные навыки через свободу вероисповедания, снижение креативности
+                }
+            ));
+
+            quests.Add(new Quest(
+                "The Rise of Humanism", "RenaissanceEra",
+                "Humanism is becoming a dominant philosophy. How should it be embraced?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Promote human dignity and individual rights", new List<string> { "SOC +2", "REL -1" }), // Социальные навыки через гуманизм, снижение религии
+        new QuestAnswer("Focus on human achievements in art, science, and philosophy", new List<string> { "CRE +1", "SCI +1", "CUL +1" }), // Креативность, наука и культура через человеческие достижения
+        new QuestAnswer("Support humanism in education to cultivate rational thinkers", new List<string> { "LRN +2", "LOG +1" }) // Образование и логика через гуманизм
                 }
             ));
 
@@ -407,9 +443,9 @@ public class QuestManager : MonoBehaviour
                 "Banking is becoming more centralized. How should people handle this new economic system?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Encourage the development of banks to boost trade", new List<string> { "SOC +1" }), // Социальные навыки
-        new QuestAnswer("Limit the power of banks to prevent corruption", new List<string> { "LOG +1" }), // Логика
-        new QuestAnswer("Use banks to fund expansion and growth", new List<string> { "MOT +1" }) // Мотивация
+        new QuestAnswer("Encourage the development of banks to boost trade", new List<string> { "SOC +1", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Limit the power of banks to prevent corruption", new List<string> { "LOG +2", "SOC -1" }), // Логика и снижение социальных навыков
+        new QuestAnswer("Use banks to fund expansion and growth", new List<string> { "MOT +2", "STR +1" }) // Мотивация и сила через расширение
                 }
             ));
 
@@ -418,9 +454,9 @@ public class QuestManager : MonoBehaviour
                 "A religious movement is challenging the authority of the Church. Should people support it?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Support the Reformation to empower individual faith", new List<string> { "REL +1" }), // Религия
-        new QuestAnswer("Oppose the Reformation to maintain the Church's power", new List<string> { "SOC -1" }), // Социальные навыки (негативно)
-        new QuestAnswer("Remain neutral and focus on internal development", new List<string> { "LOG +1" }) // Логика
+        new QuestAnswer("Support the Reformation to empower individual faith", new List<string> { "REL +2", "SOC -1" }), // Религия и снижение социальных навыков
+        new QuestAnswer("Oppose the Reformation to maintain the Church's power", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки через поддержание церкви, снижение логики
+        new QuestAnswer("Remain neutral and focus on internal development", new List<string> { "LOG +2", "SOC -2" }) // Логика и снижение социальных навыков
                 }
             ));
 
@@ -429,33 +465,57 @@ public class QuestManager : MonoBehaviour
                 "A deadly disease is spreading across the region. How should humankind respond?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Quarantine affected areas and focus on containment", new List<string> { "SOC -1" }), // Социальные навыки (негативно)
-        new QuestAnswer("Focus on finding a cure through scientific research", new List<string> { "SCI +1" }), // Наука
-        new QuestAnswer("Use the disease as an opportunity to weaken rivals", new List<string> { "STR -1" }) // Сила (негативно)
+        new QuestAnswer("Quarantine affected areas and focus on containment", new List<string> { "SOC -2", "MOT +1" }), // Снижение социальных навыков, увеличение мотивации
+        new QuestAnswer("Focus on finding a cure through scientific research", new List<string> { "SCI +2", "SOC -1" }), // Наука и снижение социальных навыков
+        new QuestAnswer("Use the disease as an opportunity to weaken rivals", new List<string> { "STR +2", "SOC -2" }), // Сила и снижение социальных навыков
+        new QuestAnswer("Neglect the issue and maintain normal activities", new List<string> { "SOC -1", "SCI -1", "CRE +1" }) // Снижение социальных и научных навыков, увеличение креативности
                 }
             ));
+
+            quests.Add(new Quest(
+                "The Rise of Secularism", "RenaissanceEra",
+                "The influence of religion is decreasing as secularism rises. How should society respond?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Promote secular ideas to advance rational thought", new List<string> { "LOG +2", "REL -1" }), // Логика и снижение религиозных навыков
+        new QuestAnswer("Support the church to maintain moral order", new List<string> { "SOC +1", "REL +1" }), // Социальные и религиозные навыки через поддержку церкви
+        new QuestAnswer("Encourage religious freedom but limit influence", new List<string> { "SOC +1", "REL -1", "CRE -1" }) // Социальные навыки через религиозную свободу, снижение религии и креативности
+                }
+            ));
+
+            quests.Add(new Quest(
+                "The Scientific Revolution", "RenaissanceEra",
+                "New discoveries in science are challenging old beliefs. How should people proceed?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Support scientific discoveries to advance knowledge", new List<string> { "SCI +2", "SOC -1" }), // Наука через открытия, снижение социальных навыков
+        new QuestAnswer("Maintain traditional beliefs to preserve order", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки через традиции, снижение логики
+        new QuestAnswer("Promote the use of science in practical inventions", new List<string> { "CRE +2", "SCI +1", "SOC -1" }) // Креативность и наука через практическое применение, снижение социальных навыков
+                }
+            ));
+
         }
-        else if (era.eraName.Contains("Middle"))
+        else if (era.eraName.Contains("Modern"))
         {
             quests.Add(new Quest(
-            "The Industrial Revolution", "ModernEra",
-            "New machines are being invented. How should people use this newfound technology?",
-            new List<QuestAnswer>
-            {
-        new QuestAnswer("Focus on factory production for economic growth", new List<string> { "SOC +1" }), // Социальные навыки
-        new QuestAnswer("Focus on improving living standards for workers", new List<string> { "EMO +1" }), // Эмоциональная стабильность
-        new QuestAnswer("Focus on developing military technologies for power", new List<string> { "STR -1" }) // Сила
-            }
-        ));
+                "The Industrial Revolution", "ModernEra",
+                "New machines are being invented. How should people use this newfound technology?",
+                new List<QuestAnswer>
+                {
+        new QuestAnswer("Focus on factory production for economic growth", new List<string> { "SOC +1", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Focus on improving living standards for workers", new List<string> { "EMO +2", "SOC -1" }), // Эмоциональная стабильность, снижение социальных навыков
+        new QuestAnswer("Focus on developing military technologies for power", new List<string> { "STR +2", "SOC -2" }) // Сила, снижение социальных навыков
+                }
+            ));
 
             quests.Add(new Quest(
                 "The Rise of Nationalism", "ModernEra",
                 "Nationalism is growing across the globe. How should people approach it?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Promote unity and national pride", new List<string> { "SOC +1" }), // Социальные навыки
-        new QuestAnswer("Support independence movements for minorities", new List<string> { "LOG +1" }), // Логика
-        new QuestAnswer("Oppose nationalism to maintain stability", new List<string> { "END +1" }) // Выносливость
+        new QuestAnswer("Promote unity and national pride", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки, снижение логики
+        new QuestAnswer("Support independence movements for minorities", new List<string> { "LOG +1", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Oppose nationalism to maintain stability", new List<string> { "END +2", "SOC -2" }) // Выносливость, снижение социальных навыков
                 }
             ));
 
@@ -464,9 +524,9 @@ public class QuestManager : MonoBehaviour
                 "Electricity is becoming widespread. How should humankind use it?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Focus on powering industries for mass production", new List<string> { "LRN +1" }), // Обучаемость
-        new QuestAnswer("Focus on improving everyday life with electric lighting", new List<string> { "SOC +1" }), // Социальные навыки
-        new QuestAnswer("Focus on developing electrical weapons for defense", new List<string> { "STR +1" }) // Сила
+        new QuestAnswer("Focus on powering industries for mass production", new List<string> { "LRN +1", "SOC -1" }), // Обучаемость, снижение социальных навыков
+        new QuestAnswer("Focus on improving everyday life with electric lighting", new List<string> { "SOC +2", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Focus on developing electrical weapons for defense", new List<string> { "STR +2", "SOC -1" }) // Сила, снижение социальных навыков
                 }
             ));
 
@@ -475,71 +535,67 @@ public class QuestManager : MonoBehaviour
                 "Newspapers and radio are spreading information rapidly. What should be people's focus?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Use it to spread political ideologies", new List<string> { "LOG +1" }), // Логика
-        new QuestAnswer("Use it to promote cultural values and art", new List<string> { "CUL +1" }), // Культура
-        new QuestAnswer("Use it to manipulate public opinion for control", new List<string> { "SOC -1" }) // Социальные навыки
+        new QuestAnswer("Use it to spread political ideologies", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Use it to promote cultural values and art", new List<string> { "CUL +2", "SOC -1" }), // Культура, снижение социальных навыков
+        new QuestAnswer("Use it to manipulate public opinion for control", new List<string> { "SOC -2", "MOT +1" }) // Снижение социальных навыков, увеличение мотивации
                 }
             ));
 
-            // Rise of Democracy
             quests.Add(new Quest(
                 "The Rise of Democracy", "ModernEra",
                 "Democracy is spreading globally. How should people approach it?",
                 new List<QuestAnswer>
                 {
-                    new QuestAnswer("Support the spread of democratic values", new List<string> { "SOC +1" }), // Социальные навыки
-                    new QuestAnswer("Maintain strong control to preserve order", new List<string> { "LOG +1" }), // Логика
-                    new QuestAnswer("Oppose democracy to preserve stability", new List<string> { "STR +1" }) // Эмоциональная стабильность
+        new QuestAnswer("Support the spread of democratic values", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки, снижение логики
+        new QuestAnswer("Maintain strong control to preserve order", new List<string> { "LOG +2", "STR -1" }), // Логика, снижение силы
+        new QuestAnswer("Oppose democracy to preserve stability", new List<string> { "STR +2", "SOC -2" }) // Сила, снижение социальных навыков
                 }
             ));
 
-            // Space Race
             quests.Add(new Quest(
                 "The Space Race", "ModernEra",
                 "The race to space is on. How should people participate?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Invest in space exploration for scientific progress", new List<string> { "SCI +1" }), // Наука
-        new QuestAnswer("Focus on military use of space technologies", new List<string> { "STR +1" }), // Сила
-        new QuestAnswer("Focus on space tourism to boost economy", new List<string> { "LRN -1" }) // Обучаемость
+        new QuestAnswer("Invest in space exploration for scientific progress", new List<string> { "SCI +2", "SOC -1" }), // Наука, снижение социальных навыков
+        new QuestAnswer("Focus on military use of space technologies", new List<string> { "STR +2", "LOG -1" }), // Сила, снижение логики
+        new QuestAnswer("Focus on space tourism to boost economy", new List<string> { "LRN +2", "MOT -1" }) // Обучаемость, снижение мотивации
                 }
             ));
 
-            // Internet Revolution
             quests.Add(new Quest(
                 "The Internet Revolution", "ModernEra",
                 "The internet is changing the world. How should people harness its power?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Focus on global communication and information sharing", new List<string> { "SOC +1" }), // Социальные навыки
-        new QuestAnswer("Focus on using the internet to boost economic growth", new List<string> { "LRN +1" }), // Обучаемость
-        new QuestAnswer("Use it for surveillance and mass control", new List<string> { "LOG -1" }) // Логика
+        new QuestAnswer("Focus on global communication and information sharing", new List<string> { "SOC +2", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Focus on using the internet to boost economic growth", new List<string> { "LRN +2", "SOC -1" }), // Обучаемость, снижение социальных навыков
+        new QuestAnswer("Use it for surveillance and mass control", new List<string> { "LOG +1", "SOC -2" }) // Логика, снижение социальных навыков
                 }
             ));
 
-            // Green Revolution
             quests.Add(new Quest(
                 "The Green Revolution", "ModernEra",
                 "New agricultural techniques are emerging. How should people use them?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Use it to increase food production for a growing population", new List<string> { "CRE +1" }), // Креативность
-        new QuestAnswer("Focus on sustainable agriculture to preserve the environment", new List<string> { "CUL +1" }), // Культура
-        new QuestAnswer("Use it to control food distribution and stabilize the economy", new List<string> { "LOG -1" }) // Логика
+        new QuestAnswer("Use it to increase food production for a growing population", new List<string> { "CRE +2", "SOC -1" }), // Креативность, снижение социальных навыков
+        new QuestAnswer("Focus on sustainable agriculture to preserve the environment", new List<string> { "CUL +1", "SOC -1" }), // Культура, снижение социальных навыков
+        new QuestAnswer("Use it to control food distribution and stabilize the economy", new List<string> { "LOG +2", "SOC -2" }) // Логика, снижение социальных навыков
                 }
             ));
 
-            // Nuclear Age
             quests.Add(new Quest(
                 "The Nuclear Age", "ModernEra",
                 "Nuclear technology has been harnessed. How should it be used?",
                 new List<QuestAnswer>
                 {
-        new QuestAnswer("Develop nuclear weapons for defense", new List<string> { "STR +1" }), // Сила
-        new QuestAnswer("Use nuclear energy to power industries and homes", new List<string> { "LRN +1" }), // Обучаемость
-        new QuestAnswer("Focus on peaceful nuclear technology for scientific research", new List<string> { "SCI +1" }) // Наука
+        new QuestAnswer("Develop nuclear weapons for defense", new List<string> { "STR +2", "SOC -1" }), // Сила, снижение социальных навыков
+        new QuestAnswer("Use nuclear energy to power industries and homes", new List<string> { "LRN +1", "CRE -1" }), // Обучаемость, снижение креативности
+        new QuestAnswer("Focus on peaceful nuclear technology for scientific research", new List<string> { "SCI +2", "SOC -1" }) // Наука, снижение социальных навыков
                 }
             ));
+
         }
         else if (era.eraName.Contains("Our"))
         {
@@ -549,9 +605,9 @@ public class QuestManager : MonoBehaviour
                 "Climate change is becoming a global issue. How should humankind respond?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Implement green technologies to reduce emissions", new List<string> { "CUL +1" }), // Культура
-            new QuestAnswer("Focus on adaptation and infrastructure to withstand climate change", new List<string> { "SOC +1" }), // Социальные навыки
-            new QuestAnswer("Prioritize economic growth over climate concerns", new List<string> { "SCI -1" }) // Наука
+        new QuestAnswer("Implement green technologies to reduce emissions", new List<string> { "CUL +1", "SCI -1" }), // Культура, снижение науки
+        new QuestAnswer("Focus on adaptation and infrastructure to withstand climate change", new List<string> { "SOC +2", "STR -1" }), // Социальные навыки, снижение силы
+        new QuestAnswer("Prioritize economic growth over climate concerns", new List<string> { "SCI -2", "LOG +1" }) // Наука, увеличение логики
                 }
             ));
 
@@ -561,9 +617,9 @@ public class QuestManager : MonoBehaviour
                 "Artificial Intelligence is advancing rapidly. How should people integrate it into society?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Focus on AI for economic growth and efficiency", new List<string> { "LOG +1" }), // Логика
-            new QuestAnswer("Create memes and +18 content", new List<string> { "SCI -5" }),
-            new QuestAnswer("Ban AI development to prevent societal disruption", new List<string> { "END -1" }) // Выносливость
+        new QuestAnswer("Focus on AI for economic growth and efficiency", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Create memes and +18 content", new List<string> { "SCI -5", "SOC -3" }), // Снижение науки и социальных навыков
+        new QuestAnswer("Ban AI development to prevent societal disruption", new List<string> { "END -1", "LOG -2" }) // Выносливость, снижение логики
                 }
             ));
 
@@ -573,9 +629,9 @@ public class QuestManager : MonoBehaviour
                 "Humankind is looking to colonize other planets. How should people approach it?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Invest heavily in space exploration to secure our future", new List<string> { "SCI +1" }), // Наука
-            new QuestAnswer("Focus on colonizing Mars and other planets to expand humanity", new List<string> { "STR +1" }), // Сила
-            new QuestAnswer("Improve sustainability on Earth before venturing into space", new List<string> { "LOG +1" }) // Культура
+        new QuestAnswer("Invest heavily in space exploration to secure our future", new List<string> { "SCI +2", "SOC -1" }), // Наука, снижение социальных навыков
+        new QuestAnswer("Focus on colonizing Mars and other planets to expand humanity", new List<string> { "STR +2", "SOC -2" }), // Сила, снижение социальных навыков
+        new QuestAnswer("Improve sustainability on Earth before venturing into space", new List<string> { "LOG +1", "CRE -1" }) // Логика, снижение креативности
                 }
             ));
 
@@ -585,7 +641,9 @@ public class QuestManager : MonoBehaviour
                 "The idea of universal basic income is being debated. What should humankind do?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Implement universal basic income to reduce inequality", new List<string> { "SOC +1" }) // Социальные навыки
+        new QuestAnswer("Implement universal basic income to reduce inequality", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки, снижение логики
+        new QuestAnswer("Support a basic income for all citizens, regardless of employment", new List<string> { "SOC +3", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Oppose basic income to encourage people to work harder", new List<string> { "END +2", "STR -1" }) // Выносливость, снижение силы
                 }
             ));
 
@@ -595,8 +653,9 @@ public class QuestManager : MonoBehaviour
                 "The world is becoming more interconnected. Should people embrace globalization or focus on nationalism?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Support nationalism to protect cultural and economic identity", new List<string> { "CUL +1" }), // Культура
-            new QuestAnswer("Focus on a balanced approach that encourages both", new List<string> { "LOG +1" }) // Логика
+        new QuestAnswer("Support nationalism to protect cultural and economic identity", new List<string> { "CUL +2", "LOG -1" }), // Культура, снижение логики
+        new QuestAnswer("Focus on a balanced approach that encourages both", new List<string> { "LOG +1", "SOC +1" }), // Логика, социальные навыки
+        new QuestAnswer("Embrace globalization to promote peace and unity", new List<string> { "SOC +2", "STR -1" }) // Социальные навыки, снижение силы
                 }
             ));
 
@@ -606,20 +665,21 @@ public class QuestManager : MonoBehaviour
                 "Healthcare access is a critical issue. How should humankind ensure it for everyone?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Implement universal healthcare systems globally", new List<string> { "SOC +1" }), // Социальные навыки
-            new QuestAnswer("Focus on privatizing healthcare to increase efficiency", new List<string> { "LOG +1" }) // Логика
+        new QuestAnswer("Implement universal healthcare systems globally", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки, снижение логики
+        new QuestAnswer("Focus on privatizing healthcare to increase efficiency", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Support a hybrid model of healthcare systems", new List<string> { "SOC +1", "END +1" }) // Социальные навыки, выносливость
                 }
             ));
 
             // Sustainable Energy
             quests.Add(new Quest(
                 "Sustainable Energy", "OurTimeEra",
-                "The need for sustainable energy sources has never been greater. What should people's our focus?",
+                "The need for sustainable energy sources has never been greater. What should people's focus be?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Invest in renewable energy sources like solar and wind", new List<string> { "CUL +1" }), // Культура
-            new QuestAnswer("Focus on nuclear energy as a clean and powerful option", new List<string> { "SCI +1" }), // Наука
-            new QuestAnswer("Promote energy conservation and efficiency measures", new List<string> { "SOC +1" }) // Социальные навыки
+        new QuestAnswer("Invest in renewable energy sources like solar and wind", new List<string> { "CUL +1", "SCI +1" }), // Культура, Наука
+        new QuestAnswer("Focus on nuclear energy as a clean and powerful option", new List<string> { "SCI +2", "SOC -1" }), // Наука, снижение социальных навыков
+        new QuestAnswer("Promote energy conservation and efficiency measures", new List<string> { "SOC +2", "LOG -1" }) // Социальные навыки, снижение логики
                 }
             ));
 
@@ -629,8 +689,9 @@ public class QuestManager : MonoBehaviour
                 "Digital privacy is being threatened in many parts of the world. How should people protect individuals?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Invest in technology to protect privacy through encryption", new List<string> { "LOG +1" }), // Логика
-            new QuestAnswer("Focus on educating the public on privacy and cybersecurity", new List<string> { "SOC +1" }) // Социальные навыки
+        new QuestAnswer("Invest in technology to protect privacy through encryption", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Focus on educating the public on privacy and cybersecurity", new List<string> { "SOC +2", "LOG -1" }), // Социальные навыки, снижение логики
+        new QuestAnswer("Support government surveillance for national security", new List<string> { "STR +1", "SOC -2" }) // Сила, снижение социальных навыков
                 }
             ));
 
@@ -640,8 +701,9 @@ public class QuestManager : MonoBehaviour
                 "Automation and AI are threatening jobs across the globe. What should humankind do?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Implement policies for job retraining and upskilling", new List<string> { "SOC +1" }), // Социальные навыки
-            new QuestAnswer("Support businesses in transitioning to automation while protecting workers", new List<string> { "LOG +1" }) // Логика
+        new QuestAnswer("Implement policies for job retraining and upskilling", new List<string> { "SOC +2", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Support businesses in transitioning to automation while protecting workers", new List<string> { "LOG +2", "SOC -1" }), // Логика, снижение социальных навыков
+        new QuestAnswer("Encourage people to learn new skills and adapt to new technologies", new List<string> { "SCI +1", "SOC +1" }) // Наука, Социальные навыки
                 }
             ));
 
@@ -651,14 +713,15 @@ public class QuestManager : MonoBehaviour
                 "Education is evolving rapidly. How should people prepare for the future?",
                 new List<QuestAnswer>
                 {
-            new QuestAnswer("Implement online learning and virtual classrooms worldwide", new List<string> { "SOC +1" }), // Социальные навыки
-            new QuestAnswer("Focus on STEM education to drive future technological growth", new List<string> { "SCI +1" }), // Наука
-            new QuestAnswer("Promote alternative education models that foster creativity and critical thinking", new List<string> { "CRE +1" }) // Креативность
+        new QuestAnswer("Implement online learning and virtual classrooms worldwide", new List<string> { "SOC +1", "CRE -1" }), // Социальные навыки, снижение креативности
+        new QuestAnswer("Focus on STEM education to drive future technological growth", new List<string> { "SCI +2", "SOC -1" }), // Наука, снижение социальных навыков
+        new QuestAnswer("Promote alternative education models that foster creativity and critical thinking", new List<string> { "CRE +2", "SOC -1" }) // Креативность, снижение социальных навыков
                 }
             ));
+
         }
 
-            return quests;
+        return quests;
     }
 
 }
