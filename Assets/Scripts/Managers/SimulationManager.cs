@@ -203,8 +203,55 @@ public class SimulationManager : MonoBehaviour
 
         for (int i = 0; i < manStats.Count; i++)
         {
-            float averageValue = (manStats[i].Value + womanStats[i].Value) / 2;
+            float manValue = manStats[i].Value;
+            float womanValue = womanStats[i].Value;
+
+            // Применяем соответствующие коэффициенты для каждого стата
+            switch (manStats[i].Name)
+            {
+                case "Strength":
+                manValue *= 1.5f;
+                womanValue *= 0.7f;
+                break;
+                case "Endurance":
+                manValue *= 1.3f;
+                womanValue *= 0.9f;
+                break;
+                case "Agility":
+                manValue *= 1.2f;
+                womanValue *= 1.4f;
+                break;
+                case "Logic":
+                manValue *= 1.2f;
+                womanValue *= 1.0f;
+                break;
+                case "Creativity":
+                manValue *= 0.8f;
+                womanValue *= 1.3f;
+                break;
+                case "Learnability":
+                manValue *= 1.0f;
+                womanValue *= 1.2f;
+                break;
+                case "Emotional Stability":
+                manValue *= 0.7f;
+                womanValue *= 1.5f;
+                break;
+                case "Social Skills":
+                manValue *= 0.6f;
+                womanValue *= 1.5f;
+                break;
+                case "Motivation":
+                manValue *= 1.1f;
+                womanValue *= 1.2f;
+                break;
+            }
+
+            // Рассчитываем среднее значение после применения коэффициентов
+            float averageValue = (manValue + womanValue) / 2;
             string abbreviation = manStats[i].Abbreviation;
+
+            // Добавляем среднее значение в humanityStats
             humanityStats.Add(new Stat(manStats[i].Name, abbreviation, averageValue));
         }
     }

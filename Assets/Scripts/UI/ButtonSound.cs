@@ -44,8 +44,6 @@ public class ButtonSound : MonoBehaviour
         // Проверяем, есть ли привязанный звук
         if (audioSource != null && buttonClickSound != null)
         {
-            Debug.Log($"AudioSource enabled: {audioSource.enabled}, AudioClip assigned: {buttonClickSound.name}");
-
             // Включаем AudioSource, если он был выключен
             if (!audioSource.enabled)
             {
