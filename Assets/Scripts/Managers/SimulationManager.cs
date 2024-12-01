@@ -28,6 +28,9 @@ public class SimulationManager : MonoBehaviour
 
     public int amountOfCompletedEvents = 0;
 
+    public AudioClip winSound;
+    public AudioClip loseSound;
+
     void Start()
     {
         man = HumanManager.Instance.chosenMan;
@@ -409,7 +412,7 @@ public class SimulationManager : MonoBehaviour
         string rewardText = $"{rewardType} increased as a reward!";
 
         StartCoroutine(UIManager.Instance.ShowMessage("Pupa and Lupa managed to rebuild human civilization and lead it to success!", "Back", rewardText));
-
+        SFXManager.Instance.PlaySound(winSound);
         Debug.Log("YOU WIN!");
     }
 
@@ -441,7 +444,7 @@ public class SimulationManager : MonoBehaviour
         string rewardText = $"{rewardType} increased as a consolation prize!";
 
         StartCoroutine(UIManager.Instance.ShowMessage("Pupa and Lupa were disappointed, even though they are robots and have no feelings, that it didn't work out this time. But they are not giving up.", "Back", rewardText));
-
+        SFXManager.Instance.PlaySound(loseSound);
         Debug.Log("YOU LOSE!");
     }
 

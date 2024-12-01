@@ -1968,6 +1968,8 @@ MonoBehaviour:
     failureSprite: {fileID: 0}
   currentEraIndex: 0
   amountOfCompletedEvents: 0
+  winSound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  loseSound: {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
 --- !u!4 &849449960
 Transform:
   m_ObjectHideFlags: 0
