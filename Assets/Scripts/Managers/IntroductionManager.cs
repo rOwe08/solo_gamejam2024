@@ -149,7 +149,7 @@ public class IntroductionManager : MonoBehaviour
     // Метод для загрузки следующей сцены с задержкой
     private IEnumerator LoadNextSceneWithDelay()
     {
-        MusicManager.Instance.PlayMusic(1);
+        MusicManager.Instance.PlayMusic(1); 
 
         yield return new WaitForSeconds(2f);  // Задержка перед загрузкой следующей сцены (можно настроить)
 

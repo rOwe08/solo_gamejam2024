@@ -49,12 +49,20 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene(string sceneName)
     {
-        MusicManager.Instance.StopMusic();
+        int buildIndex = 0;
+        if (sceneName == "SimulationScene")
+        {
+            buildIndex = 2;
+        }
+        else if(sceneName == "GeneratingScene")
+        {
+            buildIndex = 1;
+        }
+        MusicManager.Instance.PlayMusic(buildIndex);
         UIManager.Instance.transitionCanvasGroup.DOFade(1, 2f).OnComplete(() =>
         {
             // После завершения анимации загрузим следующую сцену
             GameManager.Instance.LoadScene(sceneName);
-            MusicManager.Instance.PlayMusic(SceneManager.GetSceneByName(sceneName).buildIndex);
         });
     }
 

@@ -12,6 +12,7 @@ public class ButtonScaler : MonoBehaviour
     public int numberOfRotations = 3;      // Количество полных оборотов пропеллера
     public TextMeshProUGUI buttonText;     // Ссылка на текст кнопки
     public IntroductionManager introductionManager; // Ссылка на IntroductionManager
+
     public TitleTypingEffect titleTypingEffect;  // Ссылка на скрипт TitleTypingEffect
 
     private RectTransform buttonRectTransform;
@@ -32,17 +33,16 @@ public class ButtonScaler : MonoBehaviour
 
         isClicked = true;
 
-        // Сначала запускаем анимацию стирания текста
         StartCoroutine(titleTypingEffect.EraseText());
 
-        // После завершения стирания текста, начинаем анимацию кнопки
-        DOVirtual.DelayedCall(titleTypingEffect.eraseSpeed * titleTypingEffect.displayedText.Length, RotateAndScaleButton);
+        DOVirtual.DelayedCall(titleTypingEffect.eraseSpeed * titleTypingEffect.displayedText.Length, RotateAndScaleButtonWithTextFade);
     }
 
-    private void RotateAndScaleButton()
+    private void RotateAndScaleButtonWithTextFade()
     {
-        // Устанавливаем начальный масштаб кнопки
+        // Устанавливаем начальный масштаб кнопки и тексту полную непрозрачность
         buttonRectTransform.localScale = Vector3.one;
+        buttonText.color = new Color(buttonText.color.r, buttonText.color.g, buttonText.color.b, 1f);
 
         // Рассчитываем угол поворота для полного количества оборотов
         float totalRotation = 360f * numberOfRotations;
@@ -55,8 +55,11 @@ public class ButtonScaler : MonoBehaviour
                 // После вращения запускаем анимацию увеличения кнопки
                 buttonRectTransform.DOScale(scaleMultiplier, scaleDuration).SetEase(Ease.Linear);
 
-                // После анимации увеличения кнопки, вызываем StartIntroduction
-                DOVirtual.DelayedCall(scaleDuration, () =>
+                // Анимируем исчезновение текста
+                buttonText.DOFade(0f, scaleDuration).SetEase(Ease.Linear);
+
+                // После анимации увеличения кнопки и исчезновения текста, вызываем StartIntroduction
+                DOVirtual.DelayedCall(scaleDuration + disappearDuration, () =>
                 {
                     // Запускаем функцию StartIntroduction в IntroductionManager
                     if (introductionManager != null)

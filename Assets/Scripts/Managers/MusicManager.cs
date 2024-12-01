@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
@@ -35,7 +36,21 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic(0);
+
+        int buildIndex = 0;
+        if (SceneManager.GetActiveScene().name == "SimulationScene")
+        {
+            buildIndex = 2;
+        }
+        else if (SceneManager.GetActiveScene().name == "GeneratingScene")
+        {
+            buildIndex = 1;
+        }
+        else
+        {
+            buildIndex = 0;
+        }
+        PlayMusic(buildIndex);
     }
     // Метод для начала проигрывания музыки
     public void PlayMusic(int clipIndex)
