@@ -41,15 +41,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        ScreenCapture.CaptureScreenshot("screenshot.png");
-    //        Debug.Log("A screenshot was taken!");
-    //    }
-    //}
-
     public void ApplyResult(List<string> result)
     {
         GameObject simulationManager = GameObject.Find("SimulationManager");
