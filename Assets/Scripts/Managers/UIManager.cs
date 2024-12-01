@@ -205,6 +205,15 @@ public class UIManager : MonoBehaviour
             buttonText.text = quest.Answers[i].Description;
             resultText.text = quest.Answers[i].Result;
 
+            if (resultText.text.Contains("+"))
+            {
+                resultText.color = Color.green;
+            }
+            else
+            {
+                resultText.color = Color.red;
+            }
+
             // Use a local variable to capture the current value of 'i'
             int answerIndex = i;
 

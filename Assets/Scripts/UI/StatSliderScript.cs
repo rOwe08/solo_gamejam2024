@@ -39,7 +39,6 @@ public class StatSliderScript : MonoBehaviour
     {
         // Вычисляем доступные очки
         int availablePoints = UIManager.Instance.GetAvailablePoints();
-        Debug.Log($"Slider Value Changed: {value}, Previous Value: {previousValue}, Available Points: {availablePoints}");
 
         if ((int)value > previousValue && availablePoints <= 0)
         {
@@ -48,7 +47,6 @@ public class StatSliderScript : MonoBehaviour
         else
         {
             previousValue = (int)slider.value;
-            Debug.Log($"Updated Slider Value: {slider.value}");
             UpdateNumberText(slider.value);
             UIManager.Instance.UpdateAvailablePoints();
 
