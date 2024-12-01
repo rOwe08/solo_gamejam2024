@@ -24,7 +24,10 @@ public class IntroductionManager : MonoBehaviour
         // Здесь можно добавить начальные реплики в очереди
         AddNextReplicas();
         Debug.Log("Introduction Started");
+
+
     }
+
 
     // Метод для добавления новых реплик
     private void AddNextReplicas()
