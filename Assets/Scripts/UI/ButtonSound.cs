@@ -39,12 +39,22 @@ public class ButtonSound : MonoBehaviour
     }
 
     // Метод для проигрывания звука
-    void PlaySound()
+    public void PlaySound()
     {
         // Проверяем, есть ли привязанный звук
         if (audioSource != null && buttonClickSound != null)
         {
+            Debug.Log($"AudioSource enabled: {audioSource.enabled}, AudioClip assigned: {buttonClickSound.name}");
+
+            // Включаем AudioSource, если он был выключен
+            if (!audioSource.enabled)
+            {
+                audioSource.enabled = true;
+            }
+
             audioSource.PlayOneShot(buttonClickSound);
         }
     }
+
+
 }

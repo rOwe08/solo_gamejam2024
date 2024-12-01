@@ -215,7 +215,6 @@ public class UIManager : MonoBehaviour
                 // Invoke the selected answer's action
                 quest.Answers[answerIndex].OnChosen?.Invoke();
 
-                // Hide the quest canvas after the answer is selected
                 questPanel.SetActive(false);
             });
         }
