@@ -145,6 +145,15 @@ public class UIManager : MonoBehaviour
             }
 
             eventsPanel.transform.Find("CompletedEventsText").GetComponent<TextMeshProUGUI>().text = $"Completed events {numHappenedEvents}/{requiredNumOfEvents} needed";
+
+            if(numHappenedEvents >= requiredNumOfEvents)
+            {
+                eventsPanel.transform.Find("CompletedEventsText").GetComponent<TextMeshProUGUI>().color = new Color32(85, 171, 154, 255); ;
+            }
+            else
+            {
+                eventsPanel.transform.Find("CompletedEventsText").GetComponent<TextMeshProUGUI>().color = Color.red;
+            }
         }
     }
 
