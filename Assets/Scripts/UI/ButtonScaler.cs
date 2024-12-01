@@ -15,6 +15,8 @@ public class ButtonScaler : MonoBehaviour
 
     public TitleTypingEffect titleTypingEffect;  // Ссылка на скрипт TitleTypingEffect
 
+    public GameObject runningText;
+
     private RectTransform buttonRectTransform;
     private bool isClicked = false;
 
@@ -31,6 +33,7 @@ public class ButtonScaler : MonoBehaviour
         if (isClicked)
             return; // Если уже нажали, ничего не делаем
 
+        Destroy(runningText);
         isClicked = true;
 
         StartCoroutine(titleTypingEffect.EraseText());
