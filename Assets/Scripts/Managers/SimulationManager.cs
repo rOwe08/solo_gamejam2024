@@ -149,7 +149,7 @@ public class SimulationManager : MonoBehaviour
         if (!currentEra.eraName.Contains("Future"))
         {
             // Select 3 random quests
-            List<Quest> selectedQuests = GetRandomQuests(3);
+            List<Quest> selectedQuests = GetRandomQuests(5);
 
             // Show first quest
             yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[0]));
@@ -161,6 +161,14 @@ public class SimulationManager : MonoBehaviour
 
             // Show third quest
             yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[2]));
+            UpdateEventsPanel(currentEra);
+
+            // Show third quest
+            yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[3]));
+            UpdateEventsPanel(currentEra);
+
+            // Show third quest
+            yield return StartCoroutine(UIManager.Instance.DisplayQuest(selectedQuests[4]));
             UpdateEventsPanel(currentEra);
 
             bool ToNextEra = CheckForNextEraConditions();

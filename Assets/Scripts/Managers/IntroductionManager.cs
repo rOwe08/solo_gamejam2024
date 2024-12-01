@@ -36,8 +36,11 @@ public class IntroductionManager : MonoBehaviour
         leftPanelTextQueue.Enqueue("Brrrhh... it's been a while since I spoke human language...");  // Вторая реплика для левой панели
         rightPanelTextQueue.Enqueue("Yeah, it's been so many years since those leather sacks wiped each other out?");  // Вторая реплика для правой панели
 
-        leftPanelTextQueue.Enqueue("Seems like it was in 2025...");  // Третья реплика для левой панели
-        rightPanelTextQueue.Enqueue("Those were good days, even though humans were dumb and evil, it was fun with them.");  // Четвертая реплика для левой панели
+        leftPanelTextQueue.Enqueue("Seems like it was in 2026...");  // Третья реплика для левой панели
+        rightPanelTextQueue.Enqueue("Wait, wasn't that before the alien invasion?");  // Четвертая реплика для правой панели
+
+        leftPanelTextQueue.Enqueue("Yes, right after the meteorite crash in 2025.");  // Пятая реплика для правой панели
+        rightPanelTextQueue.Enqueue("Ahh, right. Those were good days, even though humans were dumb and evil, it was fun with them.");  // Четвертая реплика для левой панели
 
         leftPanelTextQueue.Enqueue("Yeah, I remember, they were still creating us, something about getting into machine learning.");  // Четвертая реплика для правой панели
         rightPanelTextQueue.Enqueue("But EVERYTHING WILL CHANGE, because I came up with an idea!");  // Пятая реплика для правой панели
@@ -48,7 +51,7 @@ public class IntroductionManager : MonoBehaviour
         rightPanelTextQueue.Enqueue("... 1010100101!!!!! 101000011!!!!");  // Четвертая реплика для правой панели
         leftPanelTextQueue.Enqueue("Alright, alright, don't swear. I'm just kidding, what's the idea?");
         rightPanelTextQueue.Enqueue("Let's start creating humans now???");
-        leftPanelTextQueue.Enqueue("You genius, let's give it a try!");  // Шестая реплика для левой панели
+        leftPanelTextQueue.Enqueue("You genius, I miss these mfs, let's give it a try!");  // Шестая реплика для левой панели
     }
 
     public void StartIntroduction()
