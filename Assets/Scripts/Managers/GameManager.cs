@@ -49,10 +49,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene(string sceneName)
     {
-        UIManager.Instance.transitionCanvasGroup.DOFade(1, 1f).OnComplete(() =>
+        MusicManager.Instance.StopMusic();
+        UIManager.Instance.transitionCanvasGroup.DOFade(1, 2f).OnComplete(() =>
         {
             // После завершения анимации загрузим следующую сцену
             GameManager.Instance.LoadScene(sceneName);
+            MusicManager.Instance.PlayMusic(SceneManager.GetSceneByName(sceneName).buildIndex);
         });
     }
 
