@@ -150,6 +150,7 @@ public class CreatePanel : MonoBehaviour
         {
             case Stage.Physical:
                 infoText.text += "Physical Parameters";
+
                 sliders[0].value = currentHuman.Stats.First(stat => stat.Name == "Strength").Value;
                 sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Strength";
                 sliders[1].value = currentHuman.Stats.First(stat => stat.Name == "Endurance").Value;
@@ -161,8 +162,8 @@ public class CreatePanel : MonoBehaviour
 
             case Stage.Intellectual:
                 infoText.text += "Intellectual Parameters";
-                sliders[0].value = currentHuman.Stats.First(stat => stat.Name == "Logic").Value;
 
+                sliders[0].value = currentHuman.Stats.First(stat => stat.Name == "Logic").Value;
                 sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Logic";
                 sliders[1].value = currentHuman.Stats.First(stat => stat.Name == "Creativity").Value;
                 sliders[1].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Creativity";
@@ -173,6 +174,7 @@ public class CreatePanel : MonoBehaviour
 
             case Stage.Mental:
                 infoText.text += "Mental Parameters";
+
                 sliders[0].value = currentHuman.Stats.First(stat => stat.Name == "Emotional Stability").Value;
                 sliders[0].transform.Find("SliderTitle").GetComponent<TextMeshProUGUI>().text = "Emotional Stability";
                 sliders[1].value = currentHuman.Stats.First(stat => stat.Name == "Social Skills").Value;
@@ -182,6 +184,7 @@ public class CreatePanel : MonoBehaviour
 
                 break;
         }
+        UpdateAvailablePoints();
     }
 
     private void ResetSliders()

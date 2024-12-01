@@ -8,6 +8,9 @@ public class StatSliderScript : MonoBehaviour
     private TextMeshProUGUI numberText; // Ссылка на компонент Text для отображения значения
     private int previousValue; // Предыдущее значение слайдера
 
+    public AudioSource audioSource; // Ссылка на AudioSource
+    public AudioClip sliderSound; // Звук изменения слайдера
+
     void Start()
     {
         // Получаем слайдер на текущем объекте
@@ -24,28 +27,39 @@ public class StatSliderScript : MonoBehaviour
 
         // Инициализируем текст
         UpdateNumberText(slider.value);
+
+        // Инициализируем аудиосурс, если не привязан в инспекторе
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
-    // Метод для обновления текста при изменении значения слайдера
     void OnSliderValueChanged(float value)
     {
         // Вычисляем доступные очки
         int availablePoints = UIManager.Instance.GetAvailablePoints();
+        Debug.Log($"Slider Value Changed: {value}, Previous Value: {previousValue}, Available Points: {availablePoints}");
 
-        // Проверяем, не превышает ли новое значение слайдера доступные очки
         if ((int)value > previousValue && availablePoints <= 0)
         {
-            // Если очки закончились и пытаемся увеличить значение, отменяем изменение
             slider.value = previousValue;
         }
         else
         {
-            // Обновляем значение текста и сохраняем предыдущее значение
             previousValue = (int)slider.value;
+            Debug.Log($"Updated Slider Value: {slider.value}");
             UpdateNumberText(slider.value);
             UIManager.Instance.UpdateAvailablePoints();
+
+            // Проигрывание звука, если значение больше 0
+            if (value > 0)
+            {
+                audioSource.Play();
+            }
         }
     }
+
 
     // Обновляем текст при каждом изменении слайдера
     void UpdateNumberText(float value)
